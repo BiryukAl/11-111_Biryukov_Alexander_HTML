@@ -1,9 +1,14 @@
-.none_padding_table tr,th{
-}
+
 
 .none_padding_tr td,a,p{
     padding: 0;
     margin: 0;
+}
+
+.down_pyramid{
+
+    display: flex;
+    justify-content: space-around;
 }
 
 .title_search{
@@ -30,7 +35,7 @@
     display: inline-block;}
 
 .mini_table td{
-    width: 220px;
+    width: 180px;
     text-align: center;
     border-bottom: 2px solid #ccc;
 }
