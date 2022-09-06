@@ -1,0 +1,38 @@
+.none_padding_table tr,th{
+}
+
+.none_padding_tr td,a,p{
+    padding: 0;
+    margin: 0;
+}
+
+.title_search{
+    margin: 0;
+}
+
+.padding_button button {
+    margin: 3px;
+}
+
+.none_margin_tr h3,h6{
+    margin-top: 0;
+}
+
+.text_center{
+    text-align: center;
+}
+.text_left{
+    text-align: start;
+    display: inline-block;
+}
+.text_right{
+    text-align: end;
+    display: inline-block;}
+
+.mini_table td{
+    width: 220px;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+}
+
+
