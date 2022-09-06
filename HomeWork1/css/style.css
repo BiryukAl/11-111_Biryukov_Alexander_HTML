@@ -6,7 +6,6 @@
 }
 
 .down_pyramid{
-
     display: flex;
     justify-content: space-around;
 }
@@ -26,13 +25,6 @@
 .text_center{
     text-align: center;
 }
-.text_left{
-    text-align: start;
-    display: inline-block;
-}
-.text_right{
-    text-align: end;
-    display: inline-block;}
 
 .mini_table td{
     width: 180px;
