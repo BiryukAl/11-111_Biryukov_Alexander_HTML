@@ -1,0 +1,284 @@
+/* Обнуление */
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+a{
+    cursor: pointer;
+}
+
+/*    */
+.page_wrapper {
+    min-height: 100vh;
+    background-color: #141414;
+
+    padding: 0;
+}
+
+._container {
+    max-width: 990px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+/*Header*/
+.page_header_cont {
+    background-color: #222222;
+    border-bottom: 1px solid #333333;
+
+    position: fixed;
+    height: 48px;
+    width: 100%;
+    top: 0;
+    z-index: 120;
+}
+
+.page_header_wrapper {
+    height: inherit;
+}
+
+.page_header {
+    height: inherit;
+    width: 990px;
+    position: relative;
+    font-size: 12.5px;
+    text-align: left;
+
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.header_content {
+    display: flex;
+    height: inherit;
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+/*Logo*/
+.TopHomeLink {
+    display: flex;
+
+    width: 165px;
+    height: 100%;
+    align-items: center;
+}
+
+.TopHomeLink svg {
+    margin: 0 0 0 -2px;
+    fill: none;
+}
+
+/**/
+
+.TopSearch {
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.TopSearch_form {
+    display: flex;
+    align-items: center;
+}
+
+.TopSearch_input {
+    font-size: 13px;
+    padding: 0 0 0 34px;
+    border: 0;
+    border-radius: 8px;
+    margin: 0;
+    background-color: #424242;
+
+    box-sizing: border-box;
+    line-height: 28px;
+    width: 230px;
+    height: 32px;
+
+    background-position: 10px;
+    background-repeat: no-repeat;
+
+    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%20opacity%3D%22.92%22%3E%3Cpath%20opacity%3D%22.1%22%20d%3D%22M0%200H16V16H0z%22%2F%3E%3Cpath%20d%3D%22M6.5%201a5.5%205.5%200%200%201%204.383%208.823l3.896%203.9a.75.75%200%200%201-1.061%201.06l-3.895-3.9A5.5%205.5%200%201%201%206.5%201zm0%201.5a4%204%200%201%200%200%208%204%204%200%200%200%200-8z%22%20fill%3D%22%23818c99%22%20fill-rule%3D%22nonzero%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E);
+
+    color: #e1e3e6;
+    /*text-color: #7e7e7e;*/
+}
+
+.TopSearch_input:focus {
+    outline: none;
+}
+
+.TopNotification {
+    display: flex;
+    height: 100%;
+    list-style: none;
+    align-items: center;
+    cursor: pointer;
+}
+
+.TopNotification:hover {
+    background-color: #333333;
+}
+
+.TopNotification_a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*padding: 10px 12px;*/
+    height: 100%;
+    width: 48px;
+    position: relative;
+    color: #7c7c7c;
+}
+
+.TopNotification_a svg {
+    color: #7c7c7c;
+    opacity: .8;
+}
+
+.TopMusic{
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    list-style: none;
+    align-items: center;
+    cursor: pointer;
+}
+
+.TopMusic:hover{
+    background-color: #333333;
+}
+
+.TopMusic_a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    height: 100%;
+    width: 48px;
+    position: relative;
+    color: #7c7c7c;
+}
+
+.TopMusic_a svg{
+    color: #7c7c7c;
+    opacity: .8;
+}
+
+.TopMore:hover{
+    background-color: #333333;
+}
+
+.TopMore_btn{
+    border: 0;
+    border-radius: 0;
+    width: 48px;
+    height: 48px;
+    padding-left: 4px;
+    padding-right: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+
+    cursor: pointer;
+
+    color: #7c7c7c;
+    opacity: .8;
+}
+
+.TopUser_a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    font-size: 14px;
+
+    width: initial;
+
+    padding-left: 10px;
+
+    height: 100%;
+}
+
+.TopUser_a:hover{
+    background-color: #333333;
+}
+
+.TopUser_a img{
+    margin: 0;
+    border: 0;
+    border-radius: 50%;
+
+    height: 32px;
+    width: 32px;
+
+    color: transparent;
+
+    font-size: 14px;
+}
+
+.TopUser_btn_arrow{
+    margin: 0 8px 0 6px;
+    color: #656565;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Animation*/
+/*[scheme="vkcom_dark"] {*/
+/*    --calls-icon-background: var(--white_alpha8);*/
+/*}*/
+
+/*Fonts*/
+.textVK {
+    font-family: VKSans, serif;
+}
+
+@font-face {
+    font-family: VKSans;
+    src: url("../fonts/VKSans_Medium.ttf") format("medium");
+    font-style: normal;
+    font-weight: normal;
+}
+
