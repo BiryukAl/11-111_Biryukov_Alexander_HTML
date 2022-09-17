@@ -258,6 +258,9 @@ a {
 
 /*Main Page*/
 .page_layout {
+   display: flex;
+/*    FIX SCROLL*/
+
 }
 
 /*Slide Bar*/
