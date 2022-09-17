@@ -259,7 +259,7 @@ a {
 /*Main Page*/
 .page_layout {
    display: flex;
-/*    FIX SCROLL*/
+/*    FIX SCROLL        */
 
 }
 
@@ -783,6 +783,9 @@ a {
 /*Fonts*/
 .textVK {
     font-family: VKSans, serif;
+}
+body{
+    font-family: sans-serif;
 }
 
 @font-face {
