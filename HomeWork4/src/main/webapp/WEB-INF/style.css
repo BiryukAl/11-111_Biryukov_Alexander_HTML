@@ -1,0 +1,103 @@
+/* Обнуление */
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+/*    */
+body{
+    background-color: #181a1b;
+}
+
+.page_wrapper {
+    min-height: 100vh;
+    background-color: #141414;
+
+    padding: 0;
+}
+
+._container {
+    max-width: 930px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+}
+
+/*Header*/
+.header{
+    height: 48px;
+    background-color: #4d5356;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header_h1{
+    color: #e8e6e3;
+}
+
+/*Page*/
+.page_layout{
+    margin-top: 15px;
+
+}
+
+
+/*Main*/
+.register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.register h2{
+    color: #e8e6e3;
+}
+
+.register_form{
+    display: block;
+}
+.register_form input{
+    background-color: #181a1b;
+}
+
+.register_form p{
+    color: #e8e6e3;
+}
+
+
+.register_btn{
+    background-color: #181a1b;
+    color: #e8e6e3;
+}
