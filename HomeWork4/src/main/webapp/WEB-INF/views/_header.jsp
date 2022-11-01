@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" href="<c:url value="../style.css"/>">
+  <link rel="stylesheet" href="<c:url value="/style.css"/>">
 </head>
 <body>
 <header>
@@ -18,3 +18,4 @@
 </header>
 
 <div class="page_layout _container">
+</div>

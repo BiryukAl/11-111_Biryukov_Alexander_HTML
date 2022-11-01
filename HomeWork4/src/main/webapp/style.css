@@ -35,7 +35,7 @@ a {
 }
 
 /*    */
-body{
+body {
     background-color: #181a1b;
 }
 
@@ -54,7 +54,7 @@ body{
 }
 
 /*Header*/
-.header{
+.header {
     height: 48px;
     background-color: #4d5356;
     display: flex;
@@ -62,42 +62,51 @@ body{
     justify-content: center;
 }
 
-.header_h1{
+.header_h1 {
     color: #e8e6e3;
 }
 
 /*Page*/
-.page_layout{
+.page_layout {
     margin-top: 15px;
 
 }
 
 
 /*Main*/
-.register{
+.register {
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
 
-.register h2{
+.register_title {
     color: #e8e6e3;
 }
 
-.register_form{
+.register_form {
     display: block;
 }
-.register_form input{
+
+.register_form * {
+    margin: 6px 2px 4px;
+}
+
+.register_form input {
     background-color: #181a1b;
 }
 
-.register_form p{
+.register_form p {
     color: #e8e6e3;
 }
 
-
-.register_btn{
+.register_btn {
     background-color: #181a1b;
+    color: #e8e6e3;
+    margin-top: 6px;
+}
+
+.register_msg_error{
     color: #e8e6e3;
 }
