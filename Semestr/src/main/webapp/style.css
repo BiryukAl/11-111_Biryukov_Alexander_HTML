@@ -1,0 +1,205 @@
+/* Обнуление */
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+/*    */
+body {
+    background-color: #181a1b;
+}
+
+.page_wrapper {
+    min-height: 100vh;
+    background-color: #141414;
+
+    padding: 0;
+}
+
+._container {
+    width: 930px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+}
+
+/*Header*/
+.header {
+    height: 48px;
+    background-color: #4d5356;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header_nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.link_nav_head{
+    text-decoration: none;
+    color: #e8e6e3;
+}
+
+.header_logo {
+    height: 100%;
+}
+
+.header_nav_account {
+    display: flex;
+}
+
+.header_nav_account * {
+    font-size: 20px;
+    padding: 3px;
+    margin-inline: 10px;
+    border-radius: 8px;
+    background-color: #6b7173;
+}
+
+.header_nav_account *:hover {
+    background-color: #7d8183;
+}
+
+.header_h1 {
+    color: #e8e6e3;
+}
+
+/*Page*/
+.page_layout {
+    margin-top: 15px;
+
+}
+
+
+/*Setting*/
+.setting {
+    display: flex;
+    justify-content: center;
+}
+
+.setting_little_title {
+    display: grid;
+    justify-content: center;
+    color: #e8e6e3;
+    padding-bottom: 15px;
+}
+
+.side_bar_setting {
+    margin-right: 10px;
+    border-radius: 8px;
+    background-color: #252427;
+}
+
+.nav_item_setting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px;
+    border-radius: 8px;
+    height: 50px;
+
+}
+
+.nav_item_title {
+    display: grid;
+    justify-content: center;
+    color: #e8e6e3;
+}
+
+.nav_item_setting:hover {
+    background-color: #4d5356;
+}
+
+.page_selected_setting {
+    width: 530px;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #252427;
+}
+
+.page_selected_setting * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.setting_h3 {
+    color: #e8e6e3;
+}
+
+.setting_text {
+    color: #e8e6e3;
+    font-size: 18px;
+}
+
+
+/*Register*/
+.register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register_form {
+    display: block;
+}
+
+.register_form * {
+    margin: 6px 2px 4px;
+}
+
+.register_form input {
+    background-color: #181a1b;
+    color: #e8e6e3;
+}
+
+.register_form p {
+    color: #e8e6e3;
+}
+
+.register_btn {
+    background-color: #181a1b;
+    color: #e8e6e3;
+    margin-top: 6px;
+}
+
+.register_msg_error {
+    color: #e8e6e3;
+}
+
+.register_block {
+    display: flex;
+}
