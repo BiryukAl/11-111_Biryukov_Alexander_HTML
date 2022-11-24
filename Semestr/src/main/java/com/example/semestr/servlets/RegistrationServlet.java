@@ -29,7 +29,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("title_page", "My Site");
         request.setAttribute("title_header", "Account");
-        getServletContext().getRequestDispatcher("/WEB-INF/views/sing_up.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_up.jsp").forward(request, response);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RegistrationServlet extends HttpServlet {
                 repositoryUser.save(user);
             } catch (DbException e) {
                 request.setAttribute("message", "User with such login already exists.");
-                getServletContext().getRequestDispatcher("/WEB-INF/views/sing_up.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_up.jsp").forward(request, response);
                 return;
             }
 
@@ -58,7 +58,7 @@ public class RegistrationServlet extends HttpServlet {
 
         }else {
             request.setAttribute("message", "You have to fill all form fields.");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/sing_up.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_up.jsp").forward(request, response);
         }
     }
 }

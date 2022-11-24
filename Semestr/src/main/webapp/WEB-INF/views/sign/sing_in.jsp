@@ -6,15 +6,7 @@
 
     <h2 class="page_little_title">Account</h2>
     <div class="page_container">
-        <nav class="side_bar_page">
-            <a class="nav_item_page" href="<c:url value="/register"/>">
-                <h2 class="nav_item_title">Registration</h2>
-            </a>
-            <a class="nav_item_page" href="<c:url value="/signin"/>">
-                <h2 class="nav_item_title">Sign In</h2>
-            </a>
-
-        </nav>
+        <%@include file="/WEB-INF/views/sign/sign_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
             <div class="sing_flex">
 
@@ -27,7 +19,7 @@
                     <input class="register_btn" type="submit" value="Sing In">
                 </form>
                 <c:if test="${not empty message}">
-                    <h4 class="sign_msg_error">${message}</h4>
+                    <h4 class="for_server_msg">${message}</h4>
                 </c:if>
             </div>
 

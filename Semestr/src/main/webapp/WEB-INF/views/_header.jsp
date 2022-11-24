@@ -21,16 +21,12 @@
                     </div>
                     <nav class="header_nav_account">
                         <c:if test="${empty user_login}">
-                            <div class="nav_item_header">
-                                <a class="link_nav_head" href="<c:url value="/signin"/>">Sing In</a>
-                            </div>
-                            <div class="nav_item_header">
-                                <a class="link_nav_head" href="<c:url value="/register"/>">Sing Up</a>
-                            </div>
+                                <a class="nav_item_header" href="<c:url value="/signin"/>">Sing In</a>
+                                <a class="nav_item_header" href="<c:url value="/register"/>">Sing Up</a>
                         </c:if>
                         <c:if test="${not empty user_login}">
                             <div class="nav_item_header">
-                                <a class="link_nav_head" href="<c:url value="/profile"/>">Profile</a>
+                                <a class="link_nav_head" href="<c:url value="/profile"/>">${user_name}</a>
                             </div>
                         </c:if>
                     </nav>

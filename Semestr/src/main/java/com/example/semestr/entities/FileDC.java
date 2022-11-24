@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class FileDC {
-    private Long idFile;
+    private Long id;
     private String title;
     private String description;
     private Long holderId;

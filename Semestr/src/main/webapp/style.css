@@ -99,30 +99,34 @@ body {
 }
 
 .header_nav_account * {
+    color: #e8e6e3;
     font-size: 20px;
     padding: 3px;
+    padding-inline: 10px;
     margin-inline: 10px;
     border-radius: 8px;
-    background-color: #6b7173;
+    background-color: #276bc0;
 }
 
 .header_nav_account *:hover {
-    background-color: #7d8183;
+    background-color: #2b506e;
 }
 
 .header_h1 {
-    color: #e8e6e3;
+    color: #276bc0;
 }
 
 /*Page*/
 .page_layout {
     margin-top: 15px;
+    margin-bottom: 20px;
 
 }
 
 .page_container {
     display: flex;
     justify-content: center;
+
 }
 
 .page_little_title {
@@ -137,6 +141,7 @@ body {
     border-radius: 8px;
     background-color: #252427;
     width: 230px;
+
 }
 
 .nav_item_page {
@@ -175,7 +180,7 @@ body {
 
 /*Setting*/
 
-.setting_h3 {
+.selected_page_h3 {
     color: #e8e6e3;
 }
 
@@ -219,7 +224,7 @@ body {
     margin-top: 6px;
 }
 
-.sign_msg_error {
+.for_server_msg {
     color: #e8e6e3;
     padding-left: 10px;
 }
@@ -227,3 +232,52 @@ body {
 .register_block {
     display: flex;
 }
+
+
+
+/*Files*/
+.container_item_file {
+    margin: 5px;
+    background-color: #313336FF;
+    border-radius: 8px;
+    padding: 10px;
+    margin-block: 20px;
+}
+
+.item_file_title {
+
+    font-size: 25px;
+    color: #e8e6e3;
+    max-width: 610px;
+
+
+}
+
+.item_file_description {
+    color: #e8e6e3;
+    max-width: 610px;
+}
+
+.item_file_owner {
+    color: #a1998d;
+    max-width: 610px;
+}
+
+.all_btn_item_file {
+    display: flex;
+}
+
+.btn_item_file {
+    margin: 5px;
+    padding-inline: 5px;
+    padding-block: 2px;
+    background-color: #276bc0;
+    color: #e8e6e3;
+    border-radius: 8px;
+}
+
+.btn_item_file :hover {
+    background-color: #2b506e;
+}
+
+

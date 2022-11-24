@@ -34,7 +34,7 @@ public class UploadFileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/views/upload_file.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/upload_file.jsp").forward(request, response);
 
     }
 
@@ -69,7 +69,7 @@ public class UploadFileServlet extends HttpServlet {
             repositoryFile.save(fileDC);
         } catch (DbException e) {
             request.setAttribute("message", "POP)");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/upload_file.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/upload_file.jsp").forward(request, response);
             return;
         }
         System.out.printf(uploadPath);

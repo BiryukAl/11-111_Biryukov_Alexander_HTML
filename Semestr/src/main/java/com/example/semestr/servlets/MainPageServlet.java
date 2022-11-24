@@ -1,5 +1,7 @@
 package com.example.semestr.servlets;
 
+import com.example.semestr.repositories.CRUDRepositoryFileImpl;
+import com.example.semestr.repositories.CRUDRepositoryUserImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,9 +12,20 @@ import java.io.IOException;
 
 @WebServlet("/main")
 public class MainPageServlet extends HttpServlet {
+
+    private CRUDRepositoryFileImpl repositoryFile;
+    private CRUDRepositoryUserImpl repositoryUser;
+
+    @Override
+    public void init() throws ServletException {
+        repositoryFile = (CRUDRepositoryFileImpl) getServletContext().getAttribute("repositoryFile");
+        repositoryUser= (CRUDRepositoryUserImpl) getServletContext().getAttribute("repositoryUser");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/views/main_page.jsp").forward(request, response);
+        request.setAttribute("items_public_files", repositoryFile.findAllPublic()); // Можно прикрутить страницы
+        getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/main_page.jsp").forward(request, response);
 
     }
 

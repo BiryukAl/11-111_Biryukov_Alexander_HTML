@@ -23,7 +23,7 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/views/sing_in.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_in.jsp").forward(request, response);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class SignInServlet extends HttpServlet {
 
             if (user == null) {
                 request.setAttribute("message", "не правильный логин и/или пароль");
-                getServletContext().getRequestDispatcher("/WEB-INF/views/sing_in.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_in.jsp").forward(request, response);
             } else {
                 SecurityService.signIn(request, user);
                 response.sendRedirect(getServletContext().getContextPath() + "/profile");
@@ -49,7 +49,7 @@ public class SignInServlet extends HttpServlet {
 
         } else {
             request.setAttribute("message", "You have to fill all form fields.");
-            getServletContext().getRequestDispatcher("/WEB-INF/views/sing_in.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_in.jsp").forward(request, response);
 
         }
     }

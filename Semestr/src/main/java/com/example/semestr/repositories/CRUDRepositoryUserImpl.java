@@ -44,8 +44,7 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
 
     @Override
     public void save(User user) throws DbException {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_SAVE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement statement = dataSource.getConnection().prepareStatement(SQL_SAVE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
@@ -73,8 +72,7 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
 
         List<User> users = new ArrayList<>();
 
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
+        try (Statement statement = dataSource.getConnection().createStatement();
              ResultSet resultSet = statement.executeQuery(SQL_FIND_ALL_USER);
         ) {
             while (resultSet.next()) {
@@ -86,17 +84,34 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
         return users;
     }
 
+
+    //language=SQL
+    private final String SQL_FIND_USER_BY_ID = "SELECT * FROM user_oris_hm4 WHERE id = ? ";
+
     @Override
     public User findById(Long id) {
-        return null;
+        try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_FIND_USER_BY_ID);
+        ) {
+            preparedStatement.setLong(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return rsMapper.apply(resultSet);
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //language=SQL
     private final String SQL_FIND_USER_BY_LOG_AND_PASS = "SELECT * FROM user_oris_hm4 WHERE login = ? AND  password = ?";
 
     public User findByLoginAndPassword(String login, String password) {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOG_AND_PASS);
+        try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_FIND_USER_BY_LOG_AND_PASS);
         ) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
@@ -120,8 +135,7 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
 
     public User findByLogin(String login) {
 
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
+        try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_FIND_USER_BY_LOGIN);
         ) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
