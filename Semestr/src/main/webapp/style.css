@@ -12,6 +12,7 @@ ol[class] {
     padding: 0;
 }
 
+
 /* Убираем внешние отступы */
 body,
 h1,
@@ -32,17 +33,20 @@ dd {
 
 a {
     cursor: pointer;
+    text-decoration: none;
 }
 
 /*    */
 body {
-    background-color: #181a1b;
+
 }
 
 .page_wrapper {
+    grid-template-areas:"header" "main" "footer";
+    grid-template-rows: auto 1fr auto;
     min-height: 100vh;
-    background-color: #141414;
-
+    background-color: #181a1b;
+    display: grid;
     padding: 0;
 }
 
@@ -51,6 +55,19 @@ body {
     padding-left: 15px;
     padding-right: 15px;
     margin: 0 auto;
+}
+
+/*Footer*/
+.footer {
+    height: 150px;
+    margin-top: auto;
+    background: #232323;
+    padding: 40px 30px;
+}
+
+.footer_logo {
+    display: flex;
+    justify-content: center;
 }
 
 /*Header*/
@@ -68,7 +85,7 @@ body {
     justify-content: space-between;
 }
 
-.link_nav_head{
+.link_nav_head {
     text-decoration: none;
     color: #e8e6e3;
 }
@@ -103,27 +120,26 @@ body {
 
 }
 
-
-/*Setting*/
-.setting {
+.page_container {
     display: flex;
     justify-content: center;
 }
 
-.setting_little_title {
+.page_little_title {
     display: grid;
     justify-content: center;
     color: #e8e6e3;
     padding-bottom: 15px;
 }
 
-.side_bar_setting {
+.side_bar_page {
     margin-right: 10px;
     border-radius: 8px;
     background-color: #252427;
+    width: 230px;
 }
 
-.nav_item_setting {
+.nav_item_page {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,21 +156,24 @@ body {
     color: #e8e6e3;
 }
 
-.nav_item_setting:hover {
+.nav_item_page:hover {
     background-color: #4d5356;
 }
 
-.page_selected_setting {
-    width: 530px;
+.wrapper_selected_page {
+    width: 660px;
     border-radius: 8px;
     padding: 10px;
     background-color: #252427;
 }
 
-.page_selected_setting * {
+.wrapper_selected_page * {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+
+/*Setting*/
 
 .setting_h3 {
     color: #e8e6e3;
@@ -166,27 +185,31 @@ body {
 }
 
 
-/*Register*/
+/*Sign*/
 .register {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.register_form {
+.sing_flex {
+    display: flex;
+}
+
+.sign_form {
     display: block;
 }
 
-.register_form * {
+.sign_form * {
     margin: 6px 2px 4px;
 }
 
-.register_form input {
+.sign_form input {
     background-color: #181a1b;
     color: #e8e6e3;
 }
 
-.register_form p {
+.sign_form p {
     color: #e8e6e3;
 }
 
@@ -196,8 +219,9 @@ body {
     margin-top: 6px;
 }
 
-.register_msg_error {
+.sign_msg_error {
     color: #e8e6e3;
+    padding-left: 10px;
 }
 
 .register_block {

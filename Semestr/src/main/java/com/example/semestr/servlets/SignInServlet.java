@@ -11,14 +11,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/singin")
-public class SingInServlet extends HttpServlet {
+@WebServlet("/signin")
+public class SignInServlet extends HttpServlet {
 
     private CRUDRepositoryUserImpl repositoryUser;
 
     @Override
     public void init() throws ServletException {
-        repositoryUser = (CRUDRepositoryUserImpl) getServletContext().getAttribute("datasource");
+        repositoryUser = (CRUDRepositoryUserImpl) getServletContext().getAttribute("repositoryUser");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class SingInServlet extends HttpServlet {
             User user = repositoryUser.findByLoginAndPassword(login, password);
 
             if (user == null) {
-                request.setAttribute("message", "не правильный логин и пароль");
+                request.setAttribute("message", "не правильный логин и/или пароль");
                 getServletContext().getRequestDispatcher("/WEB-INF/views/sing_in.jsp").forward(request, response);
             } else {
                 SecurityService.signIn(request, user);

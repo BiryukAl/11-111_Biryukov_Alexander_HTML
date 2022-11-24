@@ -1,6 +1,8 @@
 package com.example.semestr.servlets;
 
 import com.example.semestr.entities.FileDC;
+import com.example.semestr.exeption.DbException;
+import com.example.semestr.repositories.CRUDRepositoryFileImpl;
 import com.example.semestr.services.RandomFilePath;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -13,13 +15,22 @@ import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 
-@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+import static com.example.semestr.MainContextListener.FULL_UPLOAD_DIRECTORY;
+import static com.example.semestr.MainContextListener.UPLOAD_DIRECTORY;
+
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, //Порог размера, после которого файл будет записан на диск
         maxFileSize = 1024 * 1024 * 5,
-        maxRequestSize = 1024 * 1024 * 5 * 5)
+        maxRequestSize = 1024 * 1024 * 5 * 5, //Максимальный размер, разрешенный для multipart/form-data Запросы
+        location = UPLOAD_DIRECTORY // Загружает вот сюда
+)
 @WebServlet("/upload")
 public class UploadFileServlet extends HttpServlet {
+    private CRUDRepositoryFileImpl repositoryFile;
 
-    // TODO: 22.11.2022 Добавить путь до загрузки
+    @Override
+    public void init() throws ServletException {
+        repositoryFile = (CRUDRepositoryFileImpl) getServletContext().getAttribute("repositoryFile");
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,23 +46,41 @@ public class UploadFileServlet extends HttpServlet {
 
         Part filePart = request.getPart("file");
 
-
-        String uploadPath = (String) getServletContext().getAttribute("uploadPath");
-
-        for (Part part : request.getParts()) {
-//            String fileName = RandomFilePath.generateFileName(part.getName());
-            String fileName = RandomFilePath.getFileName(part);
-            FileDC fileDC = FileDC.builder().title(title).description(description).holderId((Long) request.getSession().getAttribute("user_id")).nameFile(fileName).publicAccess(publicAccess).build();
-            // TODO: 22.11.2022 Add DB
-//            repositoryFileDC.save(fileDC);
-            part.write(uploadPath + File.separator + fileName);
+// TODO: 24.11.2022 Не работает в MainContextListener
+        String uploadPath = FULL_UPLOAD_DIRECTORY;
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
         }
 
 
+//        String uploadPath = (String) getServletContext().getAttribute("uploadPath");
 
+        String fileName = RandomFilePath.generateFileName(filePart.getSubmittedFileName());
+
+        FileDC fileDC = FileDC.builder()
+                .title(title)
+                .description(description)
+                .holderId((Long) request.getSession().getAttribute("user_id"))
+                .nameFile(fileName)
+                .publicAccess(publicAccess)
+                .build();
+        try {
+            repositoryFile.save(fileDC);
+        } catch (DbException e) {
+            request.setAttribute("message", "POP)");
+            getServletContext().getRequestDispatcher("/WEB-INF/views/upload_file.jsp").forward(request, response);
+            return;
+        }
+        System.out.printf(uploadPath);
+        System.out.printf(fileName);
+
+        filePart.write(fileName);
+
+
+        request.setAttribute("message", "GOOD!");
+        response.sendRedirect(getServletContext().getContextPath() + "/myfiles");
 
 
     }
 }
-
-

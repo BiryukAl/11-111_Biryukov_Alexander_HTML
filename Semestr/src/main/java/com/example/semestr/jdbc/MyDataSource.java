@@ -23,7 +23,7 @@ public class MyDataSource implements DataSource {
         openConnection();
     }
 
-    public void openConnection(){
+    public void openConnection() {
         try {
             connection = DriverManager.getConnection(url, username, pass);
         } catch (SQLException e) {
@@ -33,7 +33,7 @@ public class MyDataSource implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-        if (this.connection == null || this.connection.isClosed()){
+        if (this.connection == null || this.connection.isClosed()) {
             openConnection();
         }
         return connection;

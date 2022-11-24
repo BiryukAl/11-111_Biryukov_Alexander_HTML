@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.security.Security;
 
 
 @WebServlet(value = "/register")
@@ -22,7 +21,7 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
 
-        repositoryUser = (CRUDRepositoryUserImpl) getServletContext().getAttribute("datasource");
+        repositoryUser = (CRUDRepositoryUserImpl) getServletContext().getAttribute("repositoryUser");
 
     }
 

@@ -10,11 +10,12 @@ public class SecurityService {
         return request.getSession().getAttribute("user_login") != null;
     }
 
-    public static void signIn(HttpServletRequest request, User user){
+    public static void signIn(HttpServletRequest request, User user) {
         request.getSession().setAttribute("user_id", user.getId());
         request.getSession().setAttribute("user_name", user.getName());
         request.getSession().setAttribute("user_login", user.getLogin());
     }
+
     public static void signOut(HttpServletRequest request) {
         request.getSession().removeAttribute("user_id");
         request.getSession().removeAttribute("user_login");

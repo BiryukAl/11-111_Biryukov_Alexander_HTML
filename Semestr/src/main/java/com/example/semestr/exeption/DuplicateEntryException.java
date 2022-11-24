@@ -1,7 +1,7 @@
 package com.example.semestr.exeption;
 
 
-public class DuplicateEntryException extends DbException{
+public class DuplicateEntryException extends DbException {
     public DuplicateEntryException() {
         super();
     }

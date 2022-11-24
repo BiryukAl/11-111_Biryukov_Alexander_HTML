@@ -1,7 +1,5 @@
 package com.example.semestr.services;
 
-import jakarta.servlet.http.Part;
-
 import java.util.Random;
 
 public class RandomFilePath {
@@ -11,11 +9,11 @@ public class RandomFilePath {
     public static String generateFileName(String oldNameFile) {
         final String[] split = oldNameFile.split("\\.");
         final String suffix = split[split.length - 1];
-        final String name = getRandomString(targetStringLength) + "." + suffix;
-        return name;
+        final String newName = getRandomString(targetStringLength) + "." + suffix;
+        return newName;
     }
 
-    static private String getRandomString(int size){
+    static private String getRandomString(int size) {
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
         Random random = new Random();
@@ -26,14 +24,6 @@ public class RandomFilePath {
                 .toString();
 
         return generatedString;
-    }
-
-    public static String getFileName(Part part) {
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename"))
-                return content.substring(content.indexOf("=") + 2, content.length() - 1);
-        }
-        return "testName.txt";
     }
 
 }

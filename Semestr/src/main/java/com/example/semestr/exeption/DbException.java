@@ -1,7 +1,7 @@
 package com.example.semestr.exeption;
 
 
-public class DbException extends Exception{
+public class DbException extends Exception {
     public DbException() {
         super();
     }

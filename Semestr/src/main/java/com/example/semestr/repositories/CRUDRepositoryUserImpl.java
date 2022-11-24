@@ -11,20 +11,6 @@ import java.util.List;
 import java.util.function.Function;
 
 public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
-
-    //language=SQL
-    private final String SQL_FIND_ALL_USER = "SELECT * FROM user_oris_hm4";
-
-    //language=SQL
-    private final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user_oris_hm4 WHERE login = ?";
-
-    //language=SQL
-
-    private final String SQL_FIND_USER_BY_LOG_AND_PASS = "SELECT * FROM user_oris_hm4 WHERE login = ? AND  password = ?";
-
-    //language=SQL
-    private final String SQL_SAVE_USER = "INSERT INTO user_oris_hm4(name, login, password) VALUES (?,?,?)";
-
     private final DataSource dataSource;
 
     public CRUDRepositoryUserImpl(DataSource dataSource) {
@@ -52,6 +38,10 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
 
     };
 
+
+    //language=SQL
+    private final String SQL_SAVE_USER = "INSERT INTO user_oris_hm4(name, login, password) VALUES (?,?,?)";
+
     @Override
     public void save(User user) throws DbException {
         try (Connection connection = dataSource.getConnection();
@@ -73,6 +63,10 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
             throw new DuplicateEntryException(e);
         }
     }
+
+
+    //language=SQL
+    private final String SQL_FIND_ALL_USER = "SELECT * FROM user_oris_hm4";
 
     @Override
     public List<User> findAll() {
@@ -97,14 +91,17 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
         return null;
     }
 
+    //language=SQL
+    private final String SQL_FIND_USER_BY_LOG_AND_PASS = "SELECT * FROM user_oris_hm4 WHERE login = ? AND  password = ?";
+
     public User findByLoginAndPassword(String login, String password) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_LOG_AND_PASS);
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOG_AND_PASS);
         ) {
-            statement.setString(1, login);
-            statement.setString(2, password);
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
 
-            ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 return rsMapper.apply(resultSet);
@@ -117,18 +114,21 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
         }
     }
 
+    //language=SQL
+    private final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM user_oris_hm4 WHERE login = ?";
+
 
     public User findByLogin(String login) {
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
         ) {
-            statement.setString(1, login);
-            ResultSet resultSet = statement.executeQuery();
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 return rsMapper.apply(resultSet);
-            }else {
+            } else {
                 return null;
             }
 
@@ -140,8 +140,10 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
 
 
     @Override
-    public void update(User user) {}
+    public void update(User user) {
+    }
 
     @Override
-    public void delete(Long id) {}
+    public void delete(Long id) {
+    }
 }

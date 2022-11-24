@@ -2,7 +2,6 @@ package com.example.semestr.repositories;
 
 import com.example.semestr.entities.User;
 import com.example.semestr.exeption.DbException;
-import jakarta.jws.soap.SOAPBinding;
 
 import java.util.List;
 
