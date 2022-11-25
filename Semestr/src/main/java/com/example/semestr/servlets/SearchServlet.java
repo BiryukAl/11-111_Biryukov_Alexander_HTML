@@ -34,10 +34,8 @@ public class SearchServlet extends HttpServlet {
         List<FileDC> filesDC = null;
 
         if (description.isEmpty()) {
-            // TODO: 24.11.2022 Работает через раз
             filesDC = repositoryFile.findByTitle(title);
         } else {
-            // TODO: 24.11.2022  Сделать поиск по 2 аргументам
             filesDC = repositoryFile.findByTitleAndDescription(title, description);
         }
 

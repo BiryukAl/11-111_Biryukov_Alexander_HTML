@@ -12,11 +12,11 @@
                     <div class="container_item_file">
                         <h3 class="item_file_title"> ${file.title}</h3>
                         <h4 class="item_file_description">${file.description}</h4>
-                        <p class="item_file_owner">Owner: ${file.holderId} </p>
                         <div class="all_btn_item_file">
                             <a class="btn_item_file" href="<c:url value="/download?idFile=${file.id}"/>">Download</a>
                             <a class="btn_item_file" href="<c:url value="/delete?idFile=${file.id}"/>">Delete</a>
                             <a class="btn_item_file" href="<c:url value="/editfile?idFile=${file.id}"/>">Edit</a>
+
                         </div>
                     </div>
                 </c:forEach>

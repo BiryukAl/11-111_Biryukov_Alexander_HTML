@@ -10,7 +10,7 @@
                 <div class="container_item_file">
                     <h3 class="item_file_title"> ${file.title}</h3>
                     <h4 class="item_file_description">${file.description}</h4>
-                    <p class="item_file_owner">Owner: ${file.holderId} </p>
+                    <p class="item_file_owner">Owner: ${file.holderId}</p>
                     <div class="all_btn_item_file">
                         <a class="btn_item_file" href="<c:url value="/download?id=${file.id}"/>">Download</a>
                     </div>

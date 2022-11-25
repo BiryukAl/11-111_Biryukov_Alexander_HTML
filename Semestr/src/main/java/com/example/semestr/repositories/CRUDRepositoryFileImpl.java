@@ -203,7 +203,7 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
 
         try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_FIND_FILES_BY_TITLE);
         ) {
-            preparedStatement.setString(1, title);
+            preparedStatement.setString(1, title+"%");
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -227,8 +227,8 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
 
         try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_FIND_FILES_BY_TITLE_AND_DESCRIPTION);
         ) {
-            preparedStatement.setString(1, title);
-            preparedStatement.setString(2, description);
+            preparedStatement.setString(1, title+"%");
+            preparedStatement.setString(2, description+"%");
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

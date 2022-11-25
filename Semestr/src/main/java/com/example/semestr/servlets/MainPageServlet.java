@@ -14,17 +14,23 @@ import java.io.IOException;
 public class MainPageServlet extends HttpServlet {
 
     private CRUDRepositoryFileImpl repositoryFile;
-    private CRUDRepositoryUserImpl repositoryUser;
+//    private CRUDRepositoryUserImpl repositoryUser;
 
     @Override
     public void init() throws ServletException {
         repositoryFile = (CRUDRepositoryFileImpl) getServletContext().getAttribute("repositoryFile");
-        repositoryUser= (CRUDRepositoryUserImpl) getServletContext().getAttribute("repositoryUser");
+//        repositoryUser= (CRUDRepositoryUserImpl) getServletContext().getAttribute("repositoryUser");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("items_public_files", repositoryFile.findAllPublic()); // Можно прикрутить страницы
+
+// TODO: 25.11.2022 Вывод Holder Name
+//        request.setAttribute("repositoryUser", repositoryUser);
+//        repositoryUser.findById()
+        
+        
         getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/main_page.jsp").forward(request, response);
 
     }

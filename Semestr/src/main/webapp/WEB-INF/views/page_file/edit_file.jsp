@@ -8,8 +8,7 @@
         <%@ include file="/WEB-INF/views/page_file/page_files_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
             <div class="sing_flex">
-                <form class="sign_form" action="<c:url value="editfile"/>" method="post">
-
+                <form class="sign_form" action="<c:url value="editfile?idFile=${idFile}"/>" method="post">
                     <p>Title</p>
                     <input name="title" type="text">
                     <p>Description</p>
@@ -23,7 +22,6 @@
                     <h4 class="for_server_msg">${message}</h4>
                 </c:if>
             </div>
-
         </div>
     </div>
 </div>
