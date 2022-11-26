@@ -244,11 +244,11 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
     }
 
     //language=SQL
-    private final String SQL_UPDATE_FILE = "UPDATE file_oris SET title = ? , description = ? , holderid = ? , namefile = ? , publicaccess = ? WHERE id = ? ";
+    private final String SQL_UPDATE = "UPDATE file_oris SET title = ? , description = ? , holderid = ? , namefile = ? , publicaccess = ? WHERE id = ? ";
 
     @Override
     public void update(FileDC file) {
-        try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_UPDATE_FILE)) {
+        try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_UPDATE)) {
             preparedStatement.setString(1, file.getTitle());
             preparedStatement.setString(2, file.getDescription());
             preparedStatement.setLong(3, file.getHolderId());
@@ -264,8 +264,6 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
         } catch (SQLException | NoFoundRows e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     //language=SQL

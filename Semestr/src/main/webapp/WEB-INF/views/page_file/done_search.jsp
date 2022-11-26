@@ -4,7 +4,7 @@
 <div class="page_layout _container">
     <h2 class="page_little_title">Search</h2>
     <div class="page_container">
-        <%@ include file="/WEB-INF/views/page_file/page_files_side_bar_page.jsp" %>
+        <%@ include file="/WEB-INF/views/page_file/_page_files_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
 
             <c:forEach items="${items_search_files}" var="file">

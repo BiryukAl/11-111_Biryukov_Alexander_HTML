@@ -263,6 +263,12 @@ body {
     max-width: 610px;
 }
 
+.item_file_link{
+    font-size: 10px;
+    color: #a1998d;
+    max-width: 610px;
+}
+
 .all_btn_item_file {
     display: flex;
 }

@@ -41,6 +41,7 @@ public class SignInServlet extends HttpServlet {
 
             if (user == null) {
                 request.setAttribute("message", "не правильный логин и/или пароль");
+                request.setAttribute("login", login);
                 getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_in.jsp").forward(request, response);
             } else {
                 SecurityService.signIn(request, user);

@@ -4,15 +4,16 @@
 <div class="page_layout _container">
     <h2 class="page_little_title">Public Files</h2>
     <div class="page_container">
-        <%@ include file="/WEB-INF/views/page_file/page_files_side_bar_page.jsp" %>
+        <%@ include file="/WEB-INF/views/page_file/_page_files_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
             <c:forEach items="${items_public_files}" var="file">
                 <div class="container_item_file">
                     <h3 class="item_file_title"> ${file.title}</h3>
                     <h4 class="item_file_description">${file.description}</h4>
                     <p class="item_file_owner">Owner: ${file.holderId}</p>
+                    <p class="item_file_link">Link for DOWNLOAD: download?idFile=${file.id}</p>
                     <div class="all_btn_item_file">
-                        <a class="btn_item_file" href="<c:url value="/download?id=${file.id}"/>">Download</a>
+                        <a class="btn_item_file" href="<c:url value="/download?idFile=${file.id}"/>">Download</a>
                     </div>
                 </div>
             </c:forEach>

@@ -6,13 +6,13 @@
 
     <h2 class="page_little_title">Account</h2>
     <div class="page_container">
-        <%@include file="/WEB-INF/views/sign/sign_side_bar_page.jsp" %>
+        <%@include file="/WEB-INF/views/sign/_sign_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
             <div class="sing_flex">
 
                 <form class="sign_form" action="<c:url value="signin"/>" method="post">
                     <p>Login</p>
-                    <input class="input_register" name="login">
+                    <input class="input_register" name="login" <c:if test="${not empty login}">value="<c:out value="${login}"/>"</c:if>>
                     <p>Password</p>
                     <input class="input_register" name="password" type="password">
                     <br>

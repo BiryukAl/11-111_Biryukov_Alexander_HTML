@@ -1,8 +1,11 @@
 package com.example.semestr.servlets;
 
 import com.example.semestr.MainContextListener;
+import com.example.semestr.entities.FileAccess;
+import com.example.semestr.entities.FileDC;
+import com.example.semestr.repositories.CRUDRepositoryFileAccessImpl;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
-import com.example.semestr.utils.DownLoadUtils;
+import com.example.semestr.services.SecurityService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,23 +16,48 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/download")
 public class DownLoadServlet extends HttpServlet {
 
     private CRUDRepositoryFileImpl repositoryFile;
+    private CRUDRepositoryFileAccessImpl repositoryFileAccess;
+
 
     @Override
     public void init() throws ServletException {
         repositoryFile = (CRUDRepositoryFileImpl) getServletContext().getAttribute("repositoryFile");
+        repositoryFileAccess = (CRUDRepositoryFileAccessImpl) getServletContext().getAttribute("repositoryFileAccess");
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        https://russianblogs.com/article/9535893544/
-        // 1. Получить параметры запроса, имя файла
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Long idFile = Long.valueOf(request.getParameter("idFile"));
-        String fileName = repositoryFile.findById(idFile).getNameFile();
+        FileDC fileDC = repositoryFile.findById(idFile);
+
+        boolean access = SecurityService.isAccess(request, fileDC.getHolderId());
+
+        if (!fileDC.isPublicAccess() || !access){
+            List<FileAccess> userAccessId =  repositoryFileAccess.findByFileId(fileDC.getId());
+
+            for (FileAccess fileAccess: userAccessId) {
+                if (SecurityService.isAccess(request, fileAccess.getUserId())){
+                    access = true;
+                    break;
+                }
+            }
+        }
+
+        if (!access && !fileDC.isPublicAccess() ){
+            getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/no_access.jsp")
+                    .forward(request, response);
+            return;
+        }
+
+        //https://russianblogs.com/article/9535893544/
+        // 1. Получить параметры запроса, имя файла
+        String fileName = fileDC.getNameFile();
         // 2. Использование байтового входного потока для загрузки файлов в память
         //2.1 найти путь к файловому серверу
         String realPath = MainContextListener.FULL_UPLOAD_DIRECTORY;
@@ -47,8 +75,8 @@ public class DownLoadServlet extends HttpServlet {
         String agent = request.getHeader("user-agent");
         // II. Используйте метод инструмента для кодирования имени файла
         fileName = DownLoadUtils.getFileName(agent, fileName);*/
-        // TODO: 24.11.2022 Задать имя файла
-        response.setHeader("content-disposition", "attachment;fileName" + fileName);
+
+        response.setHeader("content-disposition", "attachment;fileName=" + fileDC.getTitle());
 //        response.setHeader("content-disposition", "attachment;fileName" + repositoryFile.findById(idFile).getTitle());
         // 4. Записываем данные из памяти в выходной поток
         ServletOutputStream outputStream = response.getOutputStream();
@@ -64,7 +92,8 @@ public class DownLoadServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println("GET: request.getParameter(\"idFile\"): " + request.getParameter("idFile"));
         this.doPost(request, response);
     }
 }

@@ -6,8 +6,14 @@ import jakarta.servlet.http.HttpServletRequest;
 public class SecurityService {
 
 
+
+
     public static boolean isSigned(HttpServletRequest request) {
         return request.getSession().getAttribute("user_login") != null;
+    }
+
+    public static boolean  isAccess(HttpServletRequest request, Long id){
+        return request.getSession().getAttribute("user_id") == id;
     }
 
     public static void signIn(HttpServletRequest request, User user) {

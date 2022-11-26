@@ -3,6 +3,8 @@ package com.example.semestr.repositories;
 import com.example.semestr.entities.User;
 import com.example.semestr.exeption.DbException;
 import com.example.semestr.exeption.DuplicateEntryException;
+import com.example.semestr.exeption.NoFoundRows;
+import com.example.semestr.exeption.NotUniqueLogin;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -153,11 +155,67 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
     }
 
 
-    @Override
-    public void update(User user) {
-    }
+    //language=SQL
+    private final String SQL_UPDATE = "UPDATE user_oris_hm4 SET name = ?, login = ? WHERE id = ? ";
 
     @Override
+    public void update(User user) throws NoFoundRows, NotUniqueLogin {
+        try (PreparedStatement preparedStatement = dataSource.getConnection()
+                .prepareStatement(SQL_UPDATE)) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setLong(3, user.getId());
+
+            int updRows = preparedStatement.executeUpdate();
+
+            if (updRows == 0) {
+                throw new NoFoundRows();
+            }
+        } catch (SQLException e) {
+            throw new NotUniqueLogin(e);
+        }catch (NoFoundRows e){
+            throw new NoFoundRows(e);
+        }
+    }
+
+    //language=SQL
+    private final String SQL_UPDATE_PASSWORD = "UPDATE user_oris_hm4 SET password = ? WHERE id = ? ";
+    public void updatePassword(User user) throws NoFoundRows {
+        try (PreparedStatement preparedStatement = dataSource.getConnection()
+                .prepareStatement(SQL_UPDATE_PASSWORD)) {
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setLong(2, user.getId());
+
+            int updRows = preparedStatement.executeUpdate();
+
+            if (updRows == 0) {
+                throw new NoFoundRows();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }catch (NoFoundRows e){
+            throw new NoFoundRows(e);
+        }
+    }
+
+
+    //language=SQL
+    private final String SQL_DELETE_BY_ID = "DELETE FROM user_oris_hm4 WHERE id  = ? ";
+    @Override
     public void delete(Long id) {
+        try (PreparedStatement preparedStatement = dataSource.getConnection()
+                .prepareStatement(SQL_DELETE_BY_ID);
+        ) {
+            preparedStatement.setLong(1, id);
+            int delRows = preparedStatement.executeUpdate();
+
+            if (delRows == 0) {
+                throw new NoFoundRows();
+            }
+
+        } catch (SQLException | NoFoundRows e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

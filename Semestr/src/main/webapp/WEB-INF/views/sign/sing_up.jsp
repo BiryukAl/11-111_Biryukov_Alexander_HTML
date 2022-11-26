@@ -4,7 +4,7 @@
 <div class="page_layout _container">
     <h2 class="page_little_title">Account</h2>
     <div class="page_container">
-        <%@include file="/WEB-INF/views/sign/sign_side_bar_page.jsp" %>
+        <%@include file="/WEB-INF/views/sign/_sign_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
 
 

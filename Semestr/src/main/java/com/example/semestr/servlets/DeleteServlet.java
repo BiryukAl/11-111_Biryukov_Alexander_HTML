@@ -1,6 +1,8 @@
 package com.example.semestr.servlets;
 
+import com.example.semestr.entities.FileDC;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
+import com.example.semestr.services.SecurityService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,7 +27,14 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long idFile = Long.valueOf(request.getParameter("idFile"));
-        String fileName = repositoryFile.findById(idFile).getNameFile();
+        FileDC fileDC = repositoryFile.findById(idFile);
+
+        if(!( SecurityService.isAccess(request, fileDC.getHolderId()) ) ){
+            getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/no_access.jsp").forward(request, response);
+            return ;
+        }
+
+        String fileName = fileDC.getNameFile();
         repositoryFile.delete(idFile);
         //Сами файлики можно и не удалять хехехе))))
         // TODO: 24.11.2022 Удаление через относительный путь

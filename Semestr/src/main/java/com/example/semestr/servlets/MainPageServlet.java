@@ -14,7 +14,6 @@ import java.io.IOException;
 public class MainPageServlet extends HttpServlet {
 
     private CRUDRepositoryFileImpl repositoryFile;
-//    private CRUDRepositoryUserImpl repositoryUser;
 
     @Override
     public void init() throws ServletException {
@@ -25,12 +24,7 @@ public class MainPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("items_public_files", repositoryFile.findAllPublic()); // Можно прикрутить страницы
-
-// TODO: 25.11.2022 Вывод Holder Name
-//        request.setAttribute("repositoryUser", repositoryUser);
-//        repositoryUser.findById()
-        
-        
+        // TODO: 25.11.2022 Вывод Holder Name
         getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/main_page.jsp").forward(request, response);
 
     }
