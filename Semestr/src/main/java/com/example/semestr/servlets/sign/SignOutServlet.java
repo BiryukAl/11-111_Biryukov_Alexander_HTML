@@ -1,4 +1,4 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.sign;
 
 import com.example.semestr.services.SecurityService;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/sign_out")
+@WebServlet("/account/sign_out")
 public class SignOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {

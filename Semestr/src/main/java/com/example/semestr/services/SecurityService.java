@@ -4,10 +4,6 @@ import com.example.semestr.entities.User;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class SecurityService {
-
-
-
-
     public static boolean isSigned(HttpServletRequest request) {
         return request.getSession().getAttribute("user_login") != null;
     }

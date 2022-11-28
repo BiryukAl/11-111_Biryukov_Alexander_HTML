@@ -12,12 +12,19 @@
                     <h3 class="item_file_title"> ${file.title}</h3>
                     <h4 class="item_file_description">${file.description}</h4>
                     <p class="item_file_owner">Owner: ${file.holderId} </p>
+
                     <div class="all_btn_item_file">
-                        <a class="btn_item_file" href="<c:url value="/download?id=${file.id}"/>">Download</a>
-                        <a class="btn_item_file" href="<c:url value="/delete?idFile=${file.id}"/>">Delete</a>
+                        <a class="btn_item_file" href="<c:url value="/file/download?idFile=${file.id}"/>">Download</a>
+                        <c:if test="${user_id} == ${file.holderId}">
+                            <a class="btn_item_file" href="<c:url value="/file/delete?id/file/download=${file.id}"/>">Delete</a>
+                            <a class="btn_item_file" href="<c:url value="/file/edit?idFile=${file.id}"/>">Edit</a>
+                            <a class="btn_item_file" href="<c:url value="/file/edit/access?idFile=${file.id}"/>">Edit Access</a>
+                        </c:if>
                     </div>
                 </div>
             </c:forEach>
+
+
         </div>
     </div>
 </div>

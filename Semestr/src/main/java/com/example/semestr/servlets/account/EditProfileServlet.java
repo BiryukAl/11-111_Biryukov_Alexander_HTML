@@ -1,9 +1,10 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.account;
 
 import com.example.semestr.entities.User;
-import com.example.semestr.exeption.NoFoundRows;
-import com.example.semestr.exeption.NotUniqueLogin;
+import com.example.semestr.exceptions.NoFoundRows;
+import com.example.semestr.exceptions.NotUniqueLogin;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
+import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.SecurityService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -11,7 +12,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet("/editprofile")
+@WebServlet("/profile/edit")
 public class EditProfileServlet extends HttpServlet {
 
     private CRUDRepositoryUserImpl repositoryUser;
@@ -23,6 +24,7 @@ public class EditProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DecorationPages.setTitle(request,"Edit: " + (String) request.getSession().getAttribute("user_name"));
         if (!SecurityService.isSigned(request)) {
             response.sendRedirect(getServletContext().getContextPath() + "/main");
             return;
@@ -72,6 +74,9 @@ public class EditProfileServlet extends HttpServlet {
                 request.setAttribute("message", "Not Unique Login");
                 getServletContext().getRequestDispatcher("/WEB-INF/views/account/edit_profile.jsp").forward(request, response);
             }
+            SecurityService.signOut(request);
+            SecurityService.signIn(request, newUser);
+
 
             response.sendRedirect(getServletContext().getContextPath() + "/profile");
             return;

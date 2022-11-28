@@ -1,4 +1,4 @@
-package com.example.semestr.exeption;
+package com.example.semestr.exceptions;
 
 
 public class DbException extends Exception {

@@ -8,17 +8,12 @@
             </a>
         </div>
         <div class="nav_item_page">
-            <a href="<c:url value="/editprofile"/>">
+            <a href="<c:url value="/profile/edit"/>">
                 <h2 class="nav_item_title">Edit profile</h2>
             </a>
         </div>
         <div class="nav_item_page">
-            <a href="<c:url value="/deleteprofile"/>">
-                <h2 class="nav_item_title">Delete profile</h2>
-            </a>
-        </div>
-        <div class="nav_item_page">
-            <a href="<c:url value="/sign_out"/>">
+            <a href="<c:url value="/account/sign_out"/>">
                 <h2 class="nav_item_title">Sign Out</h2>
             </a>
         </div>

@@ -1,6 +1,7 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.file;
 
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
+import com.example.semestr.services.DecorationPages;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,8 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/myfiles")
-public class MyFilesServlet extends HttpServlet {
+@WebServlet("/")
+public class MainPageServlet extends HttpServlet {
 
     private CRUDRepositoryFileImpl repositoryFile;
 
@@ -21,18 +22,15 @@ public class MyFilesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        Long idUser = (Long) request.getSession().getAttribute("user_id");
-        if (idUser != null){
-            request.setAttribute("items_my_files", repositoryFile.findByIdUser(idUser)); // Можно прикрутить страницы
-        }
-
-        getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/my_files.jsp").forward(request, response);
+        DecorationPages.setTitle(request,"ProduceDisk");
+        request.setAttribute("count_file", repositoryFile.countFiles());
+        request.setAttribute("items_public_files", repositoryFile.findAllPublicAndNameHolder(10, 0));
+        getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/main_page.jsp").forward(request, response);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        this.doGet(request, response);
     }
 }

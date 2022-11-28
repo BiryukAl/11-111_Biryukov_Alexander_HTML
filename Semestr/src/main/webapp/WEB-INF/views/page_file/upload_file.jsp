@@ -8,7 +8,7 @@
         <%@ include file="/WEB-INF/views/page_file/_page_files_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
             <c:if test="${not empty user_login }">
-                <form class="sign_form" action="<c:url value="upload"/>" method="post" enctype="multipart/form-data">
+                <form class="sign_form" action="<c:url value="/file/upload"/>" method="post" enctype="multipart/form-data">
                     <p>Title</p>
                     <input name="title" type="text">
                     <p>Description</p>
@@ -16,7 +16,7 @@
                     <p>Public access</p>
                     <input name="public_access" type="checkbox">
                     <p>User access <b>(input id separated by a space)</b></p>
-                    <input name="user_access" type="number">
+                    <input name="user_access" type="text">
                     <p>Choose file</p>
                     <input name="file" type="file">
                     <br>

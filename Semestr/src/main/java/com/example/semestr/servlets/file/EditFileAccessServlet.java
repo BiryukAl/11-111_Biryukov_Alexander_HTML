@@ -1,20 +1,21 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.file;
 
 import com.example.semestr.entities.FileAccess;
 import com.example.semestr.entities.FileDC;
-import com.example.semestr.exeption.DbException;
-import com.example.semestr.exeption.NoFoundRows;
+import com.example.semestr.exceptions.DbException;
+import com.example.semestr.exceptions.NoFoundRows;
 import com.example.semestr.repositories.CRUDRepositoryFileAccessImpl;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
+import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.SecurityService;
+import com.example.semestr.utils.UserAccessUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.Arrays;
 
-@WebServlet("/editfileaccess")
+@WebServlet("/file/edit/access")
 public class EditFileAccessServlet extends HttpServlet {
 
     private CRUDRepositoryFileImpl repositoryFile;
@@ -31,18 +32,17 @@ public class EditFileAccessServlet extends HttpServlet {
         Long idFile = Long.valueOf(request.getParameter("idFile"));
         FileDC fileDC = repositoryFile.findById(idFile);
 
+        DecorationPages.setTitle(request,"Edit: " + fileDC.getTitle());
+
+
         if (!(SecurityService.isAccess(request, fileDC.getHolderId()))) {
             getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/no_access.jsp").forward(request, response);
             return;
         }
 
-        String fileAccessString = repositoryFileAccess.findByFileId(idFile)
-                .stream()
-                .mapToLong(FileAccess::getUserId)
-                .collect(StringBuilder::new, (stringBuilder, aLong) -> stringBuilder.append(" ").append(aLong), StringBuilder::append)
-                .toString();
+        String fileAccessString = UserAccessUtil.convertToString(repositoryFileAccess.findByFileId(idFile));
 
-        request.setAttribute("public_access", fileDC.isPublicAccess());
+        request.setAttribute("public_access", fileDC.isPublicAccess()? true : null);
         request.setAttribute("user_access", fileAccessString);
         request.setAttribute("idFile", idFile);
 
@@ -70,13 +70,7 @@ public class EditFileAccessServlet extends HttpServlet {
 
         repositoryFile.update(newFileDC);
 
-        String message = "";
-
-        String[] accessUserIdString = userAccess.split("\\D+");
-        long[] accessUserIdLong = Arrays.stream(accessUserIdString)
-                .filter(str -> !str.isBlank())
-                .mapToLong(Long::valueOf).toArray();
-
+        long[] accessUserIdLong = UserAccessUtil.convertToLong(userAccess);
 
         try {
             repositoryFileAccess.deleteByFileId(idFile);
@@ -95,7 +89,7 @@ public class EditFileAccessServlet extends HttpServlet {
             }
         }
 
-        response.sendRedirect(getServletContext().getContextPath() + "/myfiles");
+        response.sendRedirect(getServletContext().getContextPath() + "/files/my");
 
     }
 }

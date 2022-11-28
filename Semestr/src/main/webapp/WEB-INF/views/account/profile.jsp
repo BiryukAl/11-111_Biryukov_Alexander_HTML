@@ -11,6 +11,8 @@
                 <p class="setting_text">${user_name}</p>
                 <h3 class="selected_page_h3">Your login:</h3>
                 <p class="setting_text">${user_login}</p>
+                <h3 class="selected_page_h3">Subscribers: </h3>
+                <p class="setting_text">${subscribers}</p>
                 <h3 class="selected_page_h3">Your ID:</h3>
                 <p class="setting_text">${user_id}</p>
             </c:if>

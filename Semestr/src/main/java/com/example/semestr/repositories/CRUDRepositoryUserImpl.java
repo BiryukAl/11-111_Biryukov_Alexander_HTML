@@ -1,10 +1,10 @@
 package com.example.semestr.repositories;
 
 import com.example.semestr.entities.User;
-import com.example.semestr.exeption.DbException;
-import com.example.semestr.exeption.DuplicateEntryException;
-import com.example.semestr.exeption.NoFoundRows;
-import com.example.semestr.exeption.NotUniqueLogin;
+import com.example.semestr.exceptions.DbException;
+import com.example.semestr.exceptions.DuplicateEntryException;
+import com.example.semestr.exceptions.NoFoundRows;
+import com.example.semestr.exceptions.NotUniqueLogin;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -46,15 +46,16 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
 
     @Override
     public void save(User user) throws DbException {
-        try (PreparedStatement statement = dataSource.getConnection().prepareStatement(SQL_SAVE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement preparedStatement = dataSource.getConnection()
+                .prepareStatement(SQL_SAVE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getLogin());
-            statement.setString(3, user.getPassword());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
 
-            statement.executeUpdate();
+            preparedStatement.executeUpdate();
 
-            ResultSet keygen = statement.getGeneratedKeys();
+            ResultSet keygen = preparedStatement.getGeneratedKeys();
 
             if (keygen.next()) {
                 user.setId(keygen.getLong("id"));
@@ -113,7 +114,8 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
     private final String SQL_FIND_USER_BY_LOG_AND_PASS = "SELECT * FROM user_oris_hm4 WHERE login = ? AND  password = ?";
 
     public User findByLoginAndPassword(String login, String password) {
-        try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_FIND_USER_BY_LOG_AND_PASS);
+        try (PreparedStatement preparedStatement = dataSource.getConnection()
+                .prepareStatement(SQL_FIND_USER_BY_LOG_AND_PASS);
         ) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);

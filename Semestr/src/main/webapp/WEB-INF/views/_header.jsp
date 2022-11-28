@@ -1,12 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>${title_page}</title>
     <link rel="stylesheet" href="<c:url value="/style.css"/>">
+    <style rel="text/css">
+        <%@ include file="/WEB-INF/fix_style.jsp" %>
+    </style>
 </head>
 <body>
 <div class="page_wrapper">
@@ -15,19 +17,21 @@
             <div class="_container">
                 <div class="header_nav">
                     <div class="header_logo">
-                        <a class="link_nav_head" href="<c:url value="/main"/>">
+                        <a class="link_nav_head" href="<c:url value="/"/>">
                             <h1 class="header_h1">ProduceDisk</h1>
                         </a>
                     </div>
+                    <form action="<c:url value="/files/search"/>" method="post" >
+                        <input name="title" type="text" placeholder="Title file">
+                        <input type="submit" value="Search">
+                    </form>
                     <nav class="header_nav_account">
                         <c:if test="${empty user_login}">
-                                <a class="nav_item_header" href="<c:url value="/signin"/>">Sing In</a>
-                                <a class="nav_item_header" href="<c:url value="/register"/>">Sing Up</a>
+                                <a class="nav_item_header" href="<c:url value="/account/sign_in"/>">Sing In</a>
+                                <a class="nav_item_header" href="<c:url value="/account/sign_up"/>">Sing Up</a>
                         </c:if>
                         <c:if test="${not empty user_login}">
-                            <div class="nav_item_header">
-                                <a class="link_nav_head" href="<c:url value="/profile"/>">${user_name}</a>
-                            </div>
+                                <a class="nav_item_header" href="<c:url value="/profile"/>">${user_name}</a>
                         </c:if>
                     </nav>
                 </div>

@@ -1,7 +1,7 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.file;
 
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
-import com.example.semestr.repositories.CRUDRepositoryUserImpl;
+import com.example.semestr.services.DecorationPages;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,23 +10,26 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/main")
-public class MainPageServlet extends HttpServlet {
+@WebServlet("/files/my")
+public class MyFilesServlet extends HttpServlet {
 
     private CRUDRepositoryFileImpl repositoryFile;
 
     @Override
     public void init() throws ServletException {
         repositoryFile = (CRUDRepositoryFileImpl) getServletContext().getAttribute("repositoryFile");
-//        repositoryUser= (CRUDRepositoryUserImpl) getServletContext().getAttribute("repositoryUser");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("items_public_files", repositoryFile.findAllPublic()); // Можно прикрутить страницы
-        // TODO: 25.11.2022 Вывод Holder Name
-        getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/main_page.jsp").forward(request, response);
+        DecorationPages.setTitle(request,"Files Disk");
 
+        Long idUser = (Long) request.getSession().getAttribute("user_id");
+        if (idUser != null){
+            request.setAttribute("items_my_files", repositoryFile.findByIdUser(idUser)); // Можно прикрутить страницы
+        }
+
+        getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/my_files.jsp").forward(request, response);
     }
 
     @Override

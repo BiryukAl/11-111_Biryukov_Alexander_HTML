@@ -1,10 +1,8 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.file;
 
-import com.example.semestr.entities.FileAccess;
 import com.example.semestr.entities.FileDC;
-import com.example.semestr.exeption.DbException;
-import com.example.semestr.repositories.CRUDRepositoryFileAccessImpl;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
+import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.SecurityService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/editfile")
+@WebServlet("/file/edit")
 public class EditFileServlet extends HttpServlet {
 
 
@@ -29,8 +27,6 @@ public class EditFileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         Long idFile = Long.valueOf(request.getParameter("idFile"));
         FileDC fileDC = repositoryFile.findById(idFile);
 
@@ -39,6 +35,7 @@ public class EditFileServlet extends HttpServlet {
             return;
         }
 
+        DecorationPages.setTitle(request,"Edit: " + fileDC.getTitle());
 
         request.setAttribute("title", fileDC.getTitle());
         request.setAttribute("description", fileDC.getDescription());
@@ -52,11 +49,15 @@ public class EditFileServlet extends HttpServlet {
         String newTitle = request.getParameter("title");
         String newDescription = request.getParameter("description");
         boolean newPublicAccess = request.getParameter("public_access") != null; //== null ? false : true
-        String userAccess = request.getParameter("user_access");
 
         Long idFile = Long.valueOf(request.getParameter("idFile"));
         FileDC oldFile = repositoryFile.findById(idFile);
 
+        if (newTitle.isEmpty()){
+            request.setAttribute("message", "Title is empty");
+            this.doGet(request,response);
+            return;
+        }
 
         FileDC newFileDC = FileDC.builder()
                 .id(idFile)
@@ -70,6 +71,6 @@ public class EditFileServlet extends HttpServlet {
         repositoryFile.update(newFileDC);
         
 
-        response.sendRedirect(getServletContext().getContextPath() + "/myfiles");
+        response.sendRedirect(getServletContext().getContextPath() + "/files/my");
     }
 }

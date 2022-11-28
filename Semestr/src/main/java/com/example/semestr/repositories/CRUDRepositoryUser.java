@@ -1,9 +1,9 @@
 package com.example.semestr.repositories;
 
 import com.example.semestr.entities.User;
-import com.example.semestr.exeption.DbException;
-import com.example.semestr.exeption.NoFoundRows;
-import com.example.semestr.exeption.NotUniqueLogin;
+import com.example.semestr.exceptions.DbException;
+import com.example.semestr.exceptions.NoFoundRows;
+import com.example.semestr.exceptions.NotUniqueLogin;
 
 import java.util.List;
 

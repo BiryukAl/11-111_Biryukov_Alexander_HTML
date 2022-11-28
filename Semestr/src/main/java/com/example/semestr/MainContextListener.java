@@ -4,6 +4,7 @@ package com.example.semestr;
 import com.example.semestr.jdbc.MyDataSource;
 import com.example.semestr.repositories.CRUDRepositoryFileAccessImpl;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
+import com.example.semestr.repositories.CRUDRepositoryFriendsImpl;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -31,6 +32,7 @@ public class MainContextListener implements ServletContextListener {
             sce.getServletContext().setAttribute("repositoryUser", new CRUDRepositoryUserImpl(myDataSource));
             sce.getServletContext().setAttribute("repositoryFile", new CRUDRepositoryFileImpl(myDataSource));
             sce.getServletContext().setAttribute("repositoryFileAccess", new CRUDRepositoryFileAccessImpl(myDataSource));
+            sce.getServletContext().setAttribute("repositoryFriends", new CRUDRepositoryFriendsImpl(myDataSource));
 
         } catch (Exception e) {
             throw new RuntimeException(e);

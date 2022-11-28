@@ -1,7 +1,8 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.sign;
 
 import com.example.semestr.entities.User;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
+import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.SecurityService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/signin")
+@WebServlet("/account/sign_in")
 public class SignInServlet extends HttpServlet {
 
     private CRUDRepositoryUserImpl repositoryUser;
@@ -23,6 +24,7 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DecorationPages.setTitle(request,"ProduceDisk:SignIn");
         getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_in.jsp").forward(request, response);
     }
 

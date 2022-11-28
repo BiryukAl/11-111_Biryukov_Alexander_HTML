@@ -1,10 +1,12 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.file;
 
 import com.example.semestr.entities.FileDC;
-import com.example.semestr.exeption.DbException;
+import com.example.semestr.exceptions.DbException;
 import com.example.semestr.repositories.CRUDRepositoryFileAccessImpl;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
+import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.RandomFilePath;
+import com.example.semestr.utils.UserAccessUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +17,6 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 import static com.example.semestr.MainContextListener.FULL_UPLOAD_DIRECTORY;
 
@@ -24,7 +25,7 @@ import static com.example.semestr.MainContextListener.FULL_UPLOAD_DIRECTORY;
         maxRequestSize = 1024 * 1024 * 5 * 5, //Максимальный размер, разрешенный для multipart/form-data Запросы
         location = FULL_UPLOAD_DIRECTORY // Загружает вот сюда
 )
-@WebServlet("/upload")
+@WebServlet("/file/upload")
 public class UploadFileServlet extends HttpServlet {
     private CRUDRepositoryFileImpl repositoryFile;
     private CRUDRepositoryFileAccessImpl repositoryFileAccess;
@@ -39,8 +40,8 @@ public class UploadFileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DecorationPages.setTitle(request,"Upload Files");
         getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/upload_file.jsp").forward(request, response);
-
     }
 
     @Override
@@ -75,10 +76,7 @@ public class UploadFileServlet extends HttpServlet {
                 .publicAccess(publicAccess)
                 .build();
 
-        String[] accessUserIdString = userAccess.split("\\D+");
-        long[] accessUserIdLong = Arrays.stream(accessUserIdString)
-                .filter(str -> !str.isBlank())
-                .mapToLong(Long::valueOf).toArray();
+        long[] accessUserIdLong = UserAccessUtil.convertToLong(userAccess);
 
         try {
             repositoryFile.save(fileDC);

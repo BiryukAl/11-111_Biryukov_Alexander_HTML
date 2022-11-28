@@ -9,11 +9,11 @@
         <div class="wrapper_selected_page">
 
             <div class="sing_flex">
-                <form class="sign_form" action="<c:url value="editfile?idFile=${idFile}"/>" method="post">
+                <form class="sign_form" action="<c:url value="/file/edit?idFile=${idFile}"/>" method="post">
                     <p>Title</p>
-                    <input name="title" type="text">
+                    <input name="title" type="text" <c:if test="${not empty title}">value="<c:out value="${title}"/>"</c:if>>
                     <p>Description</p>
-                    <input name="description" type="text">
+                    <input name="description" type="text" <c:if test="${not empty description}">value="<c:out value="${description}"/>"</c:if>>
                     <br>
                     <input type="submit" value="Edit">
                 </form>

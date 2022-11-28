@@ -9,18 +9,17 @@
             <c:if test="${not empty user_login }">
 
                 <div class="sing_flex">
-                    <form class="sign_form" action="<c:url value="editpassword"/>" method="post">
+                    <form class="sign_form" action="<c:url value="/profile/edit/password"/>" method="post">
                         <p>Old Password</p>
                         <input class="input_register" name="old_password" type="password">
                         <p>New Password</p>
                         <input class="input_register" name="new_password" type="password">
                         <br>
-                        <input class="register_btn" type="submit" value="Edit">
+                        <input class="register_btn" type="submit" value="Edit password">
                     </form>
                     <c:if test="${not empty message}">
                         <h4 class="for_server_msg">${message}</h4>
                     </c:if>
-                    <a class="btn_item_file" href="<c:url value="/editpassword"/>">Edit password</a>
 
                 </div>
 

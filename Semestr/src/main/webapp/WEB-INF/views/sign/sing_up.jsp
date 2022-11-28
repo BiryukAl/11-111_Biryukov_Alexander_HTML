@@ -6,10 +6,8 @@
     <div class="page_container">
         <%@include file="/WEB-INF/views/sign/_sign_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
-
-
             <div class="sing_flex">
-            <form class="sign_form" action="<c:url value="register"/>" method="post">
+            <form class="sign_form" action="<c:url value="/account/sign_up"/>" method="post">
                 <p>Name</p>
                 <input class="input_register" name="name" type="text"  <c:if test="${not empty name}">value="<c:out value="${name}"/>"</c:if> >
                 <p>Login</p>
@@ -23,8 +21,6 @@
                 <h4 class="for_server_msg">${message}</h4>
             </c:if>
             </div>
-
-
         </div>
     </div>
 </div>

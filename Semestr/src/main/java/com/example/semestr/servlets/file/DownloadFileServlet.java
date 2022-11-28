@@ -1,4 +1,4 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.file;
 
 import com.example.semestr.MainContextListener;
 import com.example.semestr.entities.FileAccess;
@@ -18,8 +18,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/download")
-public class DownLoadServlet extends HttpServlet {
+@WebServlet("/file/download")
+public class DownloadFileServlet extends HttpServlet {
 
     private CRUDRepositoryFileImpl repositoryFile;
     private CRUDRepositoryFileAccessImpl repositoryFileAccess;

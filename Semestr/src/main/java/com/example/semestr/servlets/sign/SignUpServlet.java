@@ -1,8 +1,9 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.sign;
 
 import com.example.semestr.entities.User;
-import com.example.semestr.exeption.DbException;
+import com.example.semestr.exceptions.DbException;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
+import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.SecurityService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +14,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(value = "/register")
-public class RegistrationServlet extends HttpServlet {
+@WebServlet("/account/sign_up")
+public class SignUpServlet extends HttpServlet {
 
     private CRUDRepositoryUserImpl repositoryUser;
 
@@ -27,8 +28,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("title_page", "My Site");
-        request.setAttribute("title_header", "Account");
+        DecorationPages.setTitle(request,"ProduceDisk:SignUp");
         getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_up.jsp").forward(request, response);
     }
 

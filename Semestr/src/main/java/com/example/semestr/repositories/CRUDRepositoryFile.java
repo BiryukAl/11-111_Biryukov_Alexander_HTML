@@ -1,7 +1,7 @@
 package com.example.semestr.repositories;
 
 import com.example.semestr.entities.FileDC;
-import com.example.semestr.exeption.DbException;
+import com.example.semestr.exceptions.DbException;
 
 import java.util.List;
 

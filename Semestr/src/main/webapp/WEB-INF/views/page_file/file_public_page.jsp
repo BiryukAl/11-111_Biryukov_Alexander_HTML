@@ -6,11 +6,14 @@
     <div class="page_container">
         <%@ include file="/WEB-INF/views/page_file/_page_files_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
-            <h3 class="selected_page_h3">Total files on disk: ${count_file}</h3>
-            <%@ include file="/WEB-INF/views/page_file/_forEach_public_files.jsp" %>
-            <c:if test="${count_file > 10}">
-                <a class="btn_item_file" href="<c:url value="/main?page=1"/>">Next page</a>
-            </c:if>
+            <div class="all_btn_item_file">
+                <c:if test="${ page > 1}">
+                    <a class="btn_item_file" href="<c:url value="/main?page=${page}&shift=1"/>">Previous page</a>
+                </c:if>
+                <a class="btn_item_file" >${page}</a>
+                <a class="btn_item_file" href="<c:url value="/main?page=${page}&shift=2"/>">Next page</a>
+            </div>
+                <%@ include file="/WEB-INF/views/page_file/_forEach_public_files.jsp" %>
         </div>
     </div>
 </div>

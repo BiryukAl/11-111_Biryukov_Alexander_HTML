@@ -9,11 +9,11 @@
         <div class="wrapper_selected_page">
 
             <div class="sing_flex">
-                <form class="sign_form" action="<c:url value="editfileaccess?idFile=${idFile}"/>" method="post">
+                <form class="sign_form" action="<c:url value="/file/edit/access?idFile=${idFile}"/>" method="post">
                     <p>Public access</p>
-                    <input name="public_access" type="checkbox">
+                    <input name="public_access" type="checkbox" <c:if test="${not empty public_access}">checked</c:if>>
                     <p>User access <b>(input id separated by a space)</b></p>
-                    <input name="user_access" type="number" <c:if test="${user_access == true}">checked</c:if>>
+                    <input name="user_access" type="text" <c:if test="${not empty user_access}">value="<c:out value="${user_access}"/>"</c:if> >
                     <br>
                     <input type="submit" value="Edit">
                 </form>

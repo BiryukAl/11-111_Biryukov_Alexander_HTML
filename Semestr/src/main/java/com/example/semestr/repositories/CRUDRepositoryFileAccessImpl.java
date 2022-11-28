@@ -1,10 +1,9 @@
 package com.example.semestr.repositories;
 
 import com.example.semestr.entities.FileAccess;
-import com.example.semestr.entities.FileDC;
-import com.example.semestr.exeption.DbException;
-import com.example.semestr.exeption.DuplicateEntryException;
-import com.example.semestr.exeption.NoFoundRows;
+import com.example.semestr.exceptions.DbException;
+import com.example.semestr.exceptions.DuplicateEntryException;
+import com.example.semestr.exceptions.NoFoundRows;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -124,7 +123,8 @@ public class CRUDRepositoryFileAccessImpl implements CRUDRepositoryFileAccess {
     }
 
     public void delete(Long fileId, Long userId) {
-        try (PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(SQL_DELETE);
+        try (PreparedStatement preparedStatement = dataSource.getConnection()
+                .prepareStatement(SQL_DELETE);
         ) {
             preparedStatement.setLong(1, fileId);
             preparedStatement.setLong(2, userId);
@@ -209,6 +209,34 @@ public class CRUDRepositoryFileAccessImpl implements CRUDRepositoryFileAccess {
 
         return fileAccesses;
     }
+
+
+
+    //language=SQL
+    private final String SQL_FIND_BY_FILE_ID_AND_USER_ID = "SELECT file_id, user_id from file_user_id where file_id = ? AND user_id = ?";
+    public FileAccess findByFileIdAndUserId(Long fileId, Long userId) throws NoFoundRows {
+        try (PreparedStatement preparedStatement = dataSource.getConnection()
+                .prepareStatement(SQL_FIND_BY_FILE_ID_AND_USER_ID);
+        ) {
+            preparedStatement.setLong(1, fileId);
+            preparedStatement.setLong(2, userId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return rsMapper.apply(resultSet);
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new NoFoundRows(e);
+        }
+
+    }
+
+
+
 
 
 }

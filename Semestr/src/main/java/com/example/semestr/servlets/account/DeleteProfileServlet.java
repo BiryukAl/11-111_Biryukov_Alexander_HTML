@@ -1,4 +1,4 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.account;
 
 import com.example.semestr.entities.User;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
@@ -9,7 +9,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet("/deleteprofile")
+@WebServlet("/profile/edit/delete")
 public class DeleteProfileServlet extends HttpServlet {
     private CRUDRepositoryUserImpl repositoryUser;
 

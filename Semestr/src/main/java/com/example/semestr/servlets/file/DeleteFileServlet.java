@@ -1,4 +1,4 @@
-package com.example.semestr.servlets;
+package com.example.semestr.servlets.file;
 
 import com.example.semestr.entities.FileDC;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
@@ -14,8 +14,8 @@ import java.io.IOException;
 
 import static com.example.semestr.MainContextListener.FULL_UPLOAD_DIRECTORY;
 
-@WebServlet("/delete")
-public class DeleteServlet extends HttpServlet {
+@WebServlet("/file/delete")
+public class DeleteFileServlet extends HttpServlet {
 
     private CRUDRepositoryFileImpl repositoryFile;
 
@@ -49,6 +49,6 @@ public class DeleteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        this.doGet(request, response);
     }
 }
