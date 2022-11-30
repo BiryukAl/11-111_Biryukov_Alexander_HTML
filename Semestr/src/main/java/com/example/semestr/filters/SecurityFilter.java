@@ -16,10 +16,6 @@ public class SecurityFilter extends HttpFilter {
     protected final String[] protectedPaths = {
             "/profile",
             "/files/my",
-            "/file/delete",
-            "/file/edit",
-            "/file/edit/access",
-            "/file/upload",
             "/subscriptions"
     };
 

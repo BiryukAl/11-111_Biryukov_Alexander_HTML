@@ -15,6 +15,12 @@ public class SecurityFileFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
+
+        if (request.getRequestURI().substring(request.getContextPath().length()).equals("/file/download")) {
+            super.doFilter(request, response, chain);
+            return;
+        }
+
         if (SecurityService.isSigned(request)) {
             super.doFilter(request, response, chain);
         } else {
