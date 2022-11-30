@@ -327,7 +327,7 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
 
 
     //language=SQL
-    private final String SQL_FIND_FILES_LINK_USER_BY_TITLE_AND_DESCRIPTION = "SELECT f.id, f.title, f.description, f.holderid, u.name, f.namefile, f.publicaccess FROM file_oris f, user_oris_hm4 u WHERE f.holderid = u.id AND  f.publicaccess = true AND title LIKE ? AND f.description LIKE ? ORDER BY f.id DESC  ";
+    private final String SQL_FIND_FILES_LINK_USER_BY_TITLE_AND_DESCRIPTION = "SELECT f.id, f.title, f.description, f.holderid, u.name, f.namefile, f.publicaccess FROM file_oris f, user_oris_hm4 u WHERE f.holderid = u.id AND  f.publicaccess = true AND LOWER(f.title) LIKE ? AND LOWER(f.description) LIKE ? ORDER BY f.id DESC ";
 
     public List<FilesAndNameHolderDC> findByNameHolderTitleAndDescription(String title, String description) {
         List<FilesAndNameHolderDC> files = new ArrayList<>();

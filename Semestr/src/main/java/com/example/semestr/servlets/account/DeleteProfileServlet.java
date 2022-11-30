@@ -9,7 +9,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet("/profile/edit/delete")
+@WebServlet("/profile/edit/delete/delete")
 public class DeleteProfileServlet extends HttpServlet {
     private CRUDRepositoryUserImpl repositoryUser;
 

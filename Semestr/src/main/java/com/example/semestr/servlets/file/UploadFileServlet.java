@@ -63,9 +63,6 @@ public class UploadFileServlet extends HttpServlet {
             uploadDir.mkdirs();
         }
 
-
-//        String uploadPath = (String) getServletContext().getAttribute("uploadPath");
-
         String fileName = RandomFilePath.generateFileName(filePart.getSubmittedFileName());
 
         FileDC fileDC = FileDC.builder()
@@ -94,7 +91,7 @@ public class UploadFileServlet extends HttpServlet {
         filePart.write(fileName);
 
         request.setAttribute("message", "GOOD!");
-        response.sendRedirect(getServletContext().getContextPath() + "/myfiles");
+        response.sendRedirect(getServletContext().getContextPath() + "/files/my");
 
 
     }

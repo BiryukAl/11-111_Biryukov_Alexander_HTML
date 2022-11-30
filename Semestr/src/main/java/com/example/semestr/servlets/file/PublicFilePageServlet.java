@@ -1,5 +1,6 @@
 package com.example.semestr.servlets.file;
 
+import com.example.semestr.entities.FilesAndNameHolderDC;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
 import com.example.semestr.services.DecorationPages;
 import jakarta.servlet.*;
@@ -7,6 +8,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
+
+import static com.example.semestr.MainContextListener.MAX_FILES_FOR_PAGE;
 
 @WebServlet("/main")
 public class PublicFilePageServlet extends HttpServlet {
@@ -29,13 +33,28 @@ public class PublicFilePageServlet extends HttpServlet {
         }
 
         Integer page = Integer.valueOf(pageStr);
-        Integer sift = Integer.valueOf(request.getParameter("shift"));
+        Integer shift = Integer.valueOf(request.getParameter("shift") == null?"0":request.getParameter("shift"));
 
-        page = page - sift;
+        if (shift == 1 ){
+            shift = -1;
+        }else if (shift == 2){
+            shift = 1;
+        }else {
+            shift = 0;
+        }
+
+        page = page + shift;
 
         request.setAttribute("page", page);
 
-        request.setAttribute("items_public_files", repositoryFile.findAllPublicAndNameHolder(10, page-1)); // Можно прикрутить страницы
+        List<FilesAndNameHolderDC>  itemsPublicFiles = repositoryFile.findAllPublicAndNameHolder(MAX_FILES_FOR_PAGE, page-1);
+
+        boolean is_next = itemsPublicFiles.size()<MAX_FILES_FOR_PAGE;
+
+
+        request.setAttribute("is_next", is_next?true:null);
+
+        request.setAttribute("items_public_files", itemsPublicFiles); // Можно прикрутить страницы
 
 
         // TODO: 25.11.2022 Вывод Holder Name

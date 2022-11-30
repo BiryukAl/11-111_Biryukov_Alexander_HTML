@@ -9,7 +9,7 @@
             <c:if test="${not empty user_login }">
 
                 <div class="sing_flex">
-                    <form class="sign_form" action="<c:url value="/profile/edit"/>" method="post">
+                    <form class="my_form" action="<c:url value="/profile/edit"/>" method="post">
                         <p>Name</p>
                         <input class="input_register" name="name" type="text"  <c:if test="${not empty name}">value="<c:out value="${name}"/>"</c:if> >
                         <p>Login</p>
@@ -23,7 +23,7 @@
                         <h4 class="for_server_msg">${message}</h4>
                     </c:if>
                     <a class="btn_item_file" href="<c:url value="/profile/edit/password"/>">Edit password</a>
-                    <a class="btn_item_file" href="<c:url value="/profile/edit/delete"/>">Delete profile</a>
+                    <a class="btn_item_file" href="<c:url value="/profile/edit/delete/delete"/>">Delete profile</a>
 
                 </div>
 

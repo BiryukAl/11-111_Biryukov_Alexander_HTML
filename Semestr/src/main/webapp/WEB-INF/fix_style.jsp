@@ -201,20 +201,29 @@ justify-content: center;
 display: flex;
 }
 
-.sign_form {
+/*.sign_form {
 display: block;
+}*/
+
+.my_form {
+display: block;
+margin: 5px;
+background-color: #313336FF;
+border-radius: 8px;
+padding: 10px;
+margin-block: 20px;
 }
 
-.sign_form * {
+.my_form * {
 margin: 6px 2px 4px;
 }
 
-.sign_form input {
+.my_form input {
 background-color: #181a1b;
 color: #e8e6e3;
 }
 
-.sign_form p {
+.my_form p {
 color: #e8e6e3;
 }
 

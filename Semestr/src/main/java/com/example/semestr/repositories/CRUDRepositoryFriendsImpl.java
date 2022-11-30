@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -75,6 +74,38 @@ public class CRUDRepositoryFriendsImpl {
         }
         return friends;
     }
+
+
+
+    //language=SQL
+    private final String SQL_FIND_USER_BY_NAME = "SELECT id, name FROM user_oris_hm4 WHERE lower(name) LIKE ? order by name desc ";
+
+
+    public List<FriendDC> findUserByName(String name) {
+        List<FriendDC> friends = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = dataSource.getConnection()
+                .prepareStatement(SQL_FIND_USER_BY_NAME);
+        ) {
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                friends.add(friendMapper.apply(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return friends;
+    }
+
+
+
+
+
+
+
+
 
     //language=SQL
     private final String SQL_SAVE_FRIEND = "INSERT INTO friends_oris(id_user, id_friend) VALUES (?,?)";
@@ -164,9 +195,6 @@ public class CRUDRepositoryFriendsImpl {
 
     //language=SQL
     private final String SQL_SUBSCRIBERS_COUNT = "SELECT count(*) as count from friends_oris WHERE id_friend = ?";
-
-
-
     public Long countSubscribers(Long id){
         try (PreparedStatement preparedStatement = dataSource.getConnection()
                 .prepareStatement(SQL_SUBSCRIBERS_COUNT);

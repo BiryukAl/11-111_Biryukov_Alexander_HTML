@@ -9,7 +9,7 @@
             <c:if test="${not empty user_login }">
 
                 <div class="sing_flex">
-                    <form class="sign_form" action="<c:url value="/profile/edit/password"/>" method="post">
+                    <form class="my_form" action="<c:url value="/profile/edit/password"/>" method="post">
                         <p>Old Password</p>
                         <input class="input_register" name="old_password" type="password">
                         <p>New Password</p>

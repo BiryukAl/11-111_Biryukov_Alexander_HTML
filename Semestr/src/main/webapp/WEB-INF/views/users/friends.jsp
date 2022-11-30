@@ -9,7 +9,7 @@
         <div class="wrapper_selected_page">
             <div class="header_nav_account">
                 <a class="btn_item_file" href="<c:url value="/user/find"/>">
-                    Upload
+                    Find User
                 </a>
             </div>
             <h3 class="selected_page_h3">Count subscriptions: ${count_subscriptions}</h3>

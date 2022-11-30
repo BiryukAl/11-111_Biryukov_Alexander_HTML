@@ -33,10 +33,10 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
+        DecorationPages.setTitle(request,"Search:"+title+" "+ description);
 
         System.out.println("title: " + title + " description: " + description);
 
-        DecorationPages.setTitle(request,"Search:"+title+" "+ description);
 
         List<FilesAndNameHolderDC> files = null;
 
@@ -47,6 +47,9 @@ public class SearchServlet extends HttpServlet {
         if (description == null){
             description = "";
         }
+
+        title = title.toLowerCase();
+        description = description.toLowerCase();
 
         if (!(title.isEmpty() && description.isEmpty())){
             files = repositoryFile.findByNameHolderTitleAndDescription(title, description);

@@ -7,7 +7,7 @@
     <div class="page_container">
         <%@ include file="/WEB-INF/views/page_file/_page_files_side_bar_page.jsp" %>
         <div class="wrapper_selected_page">
-            <form class="sign_form" action="<c:url value="/files/search"/>" method="post">
+            <form class="my_form" action="<c:url value="/files/search"/>" method="post">
                 <p>Title</p>
                 <input name="title" type="text" <c:if test="${not empty title}">value="<c:out value="${title}"/>"</c:if> >
                 <p>Description</p>

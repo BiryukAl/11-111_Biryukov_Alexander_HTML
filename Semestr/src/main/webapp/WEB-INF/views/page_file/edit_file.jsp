@@ -9,7 +9,7 @@
         <div class="wrapper_selected_page">
 
             <div class="sing_flex">
-                <form class="sign_form" action="<c:url value="/file/edit?idFile=${idFile}"/>" method="post">
+                <form class="my_form" action="<c:url value="/file/edit?idFile=${idFile}"/>" method="post">
                     <p>Title</p>
                     <input name="title" type="text" <c:if test="${not empty title}">value="<c:out value="${title}"/>"</c:if>>
                     <p>Description</p>

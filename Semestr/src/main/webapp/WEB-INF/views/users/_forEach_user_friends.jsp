@@ -7,11 +7,6 @@
     <div class="all_btn_item_file">
       <a class="btn_item_file" href="<c:url value="/subscriptions/unsubscribe?idUser=${friend.id}"/>">Unsubscribe</a>
       <a class="btn_item_file" href="<c:url value="/user?idUser=${friend.id}"/>">Go to Profile</a>
-
     </div>
-
-
-
-
   </div>
 </c:forEach>

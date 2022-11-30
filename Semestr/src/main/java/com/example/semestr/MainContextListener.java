@@ -16,7 +16,7 @@ public class MainContextListener implements ServletContextListener {
 //    public static final String UPLOAD_DIRECTORY = "upload/";
 //    public static final String FULL_UPLOAD_DIRECTORY = "/home/userlin/web_servers/glassfish6/glassfish/domains/domain1/generated/jsp/Semestr-1.0-SNAPSHOT/upload/";
     public static final String FULL_UPLOAD_DIRECTORY = "/home/userlin/web_servers/upload_server/";
-
+    public static final Integer MAX_FILES_FOR_PAGE = 10;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

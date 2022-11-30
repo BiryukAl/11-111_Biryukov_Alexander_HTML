@@ -10,7 +10,7 @@
         <div class="wrapper_selected_page">
             <div class="sing_flex">
 
-                <form class="sign_form" action="<c:url value="/account/sign_in"/>" method="post">
+                <form class="my_form" action="<c:url value="/account/sign_in"/>" method="post">
                     <p>Login</p>
                     <input class="input_register" name="login" <c:if test="${not empty login}">value="<c:out value="${login}"/>"</c:if>>
                     <p>Password</p>

@@ -11,7 +11,11 @@
                     <a class="btn_item_file" href="<c:url value="/main?page=${page}&shift=1"/>">Previous page</a>
                 </c:if>
                 <a class="btn_item_file" >${page}</a>
-                <a class="btn_item_file" href="<c:url value="/main?page=${page}&shift=2"/>">Next page</a>
+                <c:if test="${empty is_next}">
+                    <a class="btn_item_file" href="<c:url value="/main?page=${page}&shift=2"/>">Next page</a>
+                </c:if>
+
+
             </div>
                 <%@ include file="/WEB-INF/views/page_file/_forEach_public_files.jsp" %>
         </div>

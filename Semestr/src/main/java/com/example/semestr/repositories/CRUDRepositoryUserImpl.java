@@ -157,6 +157,12 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
     }
 
 
+
+
+
+
+
+
     //language=SQL
     private final String SQL_UPDATE = "UPDATE user_oris_hm4 SET name = ?, login = ? WHERE id = ? ";
 
