@@ -4,6 +4,7 @@ import com.example.semestr.entities.FriendDC;
 import com.example.semestr.entities.User;
 import com.example.semestr.repositories.CRUDRepositoryFriendsImpl;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
+import com.example.semestr.services.DecorationPages;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,13 +28,14 @@ public class FindUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DecorationPages.setTitle(request, "Find User");
         getServletContext().getRequestDispatcher("/WEB-INF/views/users/find_user.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getParameter("idUser") != null){
+        if (request.getParameter("idUser") != null) {
             Long idUser = Long.valueOf(request.getParameter("idUser"));
 
             User user = repositoryUser.findById(idUser);
@@ -45,7 +47,7 @@ public class FindUserServlet extends HttpServlet {
                 response.sendRedirect(getServletContext().getContextPath() + "/user?idUser=" + idUser);
             }
             return;
-        }else if (request.getParameter("find_name_user") != null){
+        } else if (request.getParameter("find_name_user") != null) {
             String nameUser = request.getParameter("find_name_user");
 
             nameUser = nameUser.toLowerCase();

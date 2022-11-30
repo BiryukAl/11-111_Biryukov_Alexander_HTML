@@ -2,9 +2,11 @@ package com.example.semestr.servlets.subscribers;
 
 import com.example.semestr.exceptions.NoFoundRows;
 import com.example.semestr.repositories.CRUDRepositoryFriendsImpl;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -30,8 +32,6 @@ public class UnsubscribeServlet extends HttpServlet {
                 System.out.println("POOP");
             }
         }
-
-        response.sendRedirect(getServletContext().getContextPath() + "/subscriptions");
     }
 
     @Override

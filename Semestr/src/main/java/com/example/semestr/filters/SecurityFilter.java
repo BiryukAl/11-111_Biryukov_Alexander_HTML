@@ -1,8 +1,9 @@
 package com.example.semestr.filters;
 
 import com.example.semestr.services.SecurityService;
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +21,6 @@ public class SecurityFilter extends HttpFilter {
             "/file/edit/access",
             "/file/upload",
             "/subscriptions"
-
     };
 
     @Override

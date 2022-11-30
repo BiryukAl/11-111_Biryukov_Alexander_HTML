@@ -6,9 +6,11 @@ import com.example.semestr.exceptions.NotUniqueLogin;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
 import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.SecurityService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -24,7 +26,7 @@ public class EditProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DecorationPages.setTitle(request,"Edit: " + (String) request.getSession().getAttribute("user_name"));
+        DecorationPages.setTitle(request, "Edit: " + (String) request.getSession().getAttribute("user_name"));
         if (!SecurityService.isSigned(request)) {
             response.sendRedirect(getServletContext().getContextPath() + "/main");
             return;
@@ -63,7 +65,6 @@ public class EditProfileServlet extends HttpServlet {
                     .login(login)
                     .password(oldUser.getPassword())
                     .build();
-
 
             try {
                 repositoryUser.update(newUser);

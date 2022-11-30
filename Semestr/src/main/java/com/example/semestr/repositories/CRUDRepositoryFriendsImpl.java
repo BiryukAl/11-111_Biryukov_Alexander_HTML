@@ -76,7 +76,6 @@ public class CRUDRepositoryFriendsImpl {
     }
 
 
-
     //language=SQL
     private final String SQL_FIND_USER_BY_NAME = "SELECT id, name FROM user_oris_hm4 WHERE lower(name) LIKE ? order by name desc ";
 
@@ -87,10 +86,10 @@ public class CRUDRepositoryFriendsImpl {
         try (PreparedStatement preparedStatement = dataSource.getConnection()
                 .prepareStatement(SQL_FIND_USER_BY_NAME);
         ) {
-            preparedStatement.setString(1, name);
+            preparedStatement.setString(1, name + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 friends.add(friendMapper.apply(resultSet));
             }
         } catch (SQLException e) {
@@ -98,13 +97,6 @@ public class CRUDRepositoryFriendsImpl {
         }
         return friends;
     }
-
-
-
-
-
-
-
 
 
     //language=SQL
@@ -142,7 +134,7 @@ public class CRUDRepositoryFriendsImpl {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } catch (NoFoundRows e){
+        } catch (NoFoundRows e) {
             throw new NoFoundRows(e);
         }
     }
@@ -150,7 +142,8 @@ public class CRUDRepositoryFriendsImpl {
 
     //language=SQL
     public final String SQL_FIND_FRIEND = "SELECT id_user, id_friend FROM friends_oris WHERE id_user = ? AND  id_friend = ? ";
-    public RelationFriend isFriend(Long idUser, Long idFriend){
+
+    public RelationFriend isFriend(Long idUser, Long idFriend) {
         try (PreparedStatement preparedStatement = dataSource.getConnection()
                 .prepareStatement(SQL_FIND_FRIEND);
         ) {
@@ -173,18 +166,18 @@ public class CRUDRepositoryFriendsImpl {
     //language=SQL
     private final String SQL_FRIEND_COUNT = "SELECT count(*) as count from friends_oris WHERE id_user = ?";
 
-    public Long countFriends(Long id){
+    public Long countFriends(Long id) {
         try (PreparedStatement preparedStatement = dataSource.getConnection()
                 .prepareStatement(SQL_FRIEND_COUNT);
-        ){
+        ) {
 
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return resultSet.getLong("count");
-            }else {
+            } else {
                 return null;
             }
 
@@ -195,18 +188,19 @@ public class CRUDRepositoryFriendsImpl {
 
     //language=SQL
     private final String SQL_SUBSCRIBERS_COUNT = "SELECT count(*) as count from friends_oris WHERE id_friend = ?";
-    public Long countSubscribers(Long id){
+
+    public Long countSubscribers(Long id) {
         try (PreparedStatement preparedStatement = dataSource.getConnection()
                 .prepareStatement(SQL_SUBSCRIBERS_COUNT);
-        ){
+        ) {
 
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return resultSet.getLong("count");
-            }else {
+            } else {
                 return null;
             }
 
@@ -214,9 +208,6 @@ public class CRUDRepositoryFriendsImpl {
             throw new RuntimeException(e);
         }
     }
-
-
-
 
 
 }

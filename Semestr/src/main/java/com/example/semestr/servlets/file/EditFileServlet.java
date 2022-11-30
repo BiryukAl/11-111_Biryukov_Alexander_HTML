@@ -35,7 +35,7 @@ public class EditFileServlet extends HttpServlet {
             return;
         }
 
-        DecorationPages.setTitle(request,"Edit: " + fileDC.getTitle());
+        DecorationPages.setTitle(request, "Edit: " + fileDC.getTitle());
 
         request.setAttribute("title", fileDC.getTitle());
         request.setAttribute("description", fileDC.getDescription());
@@ -53,9 +53,9 @@ public class EditFileServlet extends HttpServlet {
         Long idFile = Long.valueOf(request.getParameter("idFile"));
         FileDC oldFile = repositoryFile.findById(idFile);
 
-        if (newTitle.isEmpty()){
+        if (newTitle.isEmpty()) {
             request.setAttribute("message", "Title is empty");
-            this.doGet(request,response);
+            this.doGet(request, response);
             return;
         }
 
@@ -69,7 +69,7 @@ public class EditFileServlet extends HttpServlet {
                 .build();
 
         repositoryFile.update(newFileDC);
-        
+
 
         response.sendRedirect(getServletContext().getContextPath() + "/files/my");
     }

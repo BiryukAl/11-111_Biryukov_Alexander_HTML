@@ -70,9 +70,6 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
     };
 
 
-
-
-
     //language=SQL
     private final String SQL_SAVE_FILE = "INSERT INTO file_oris(title, description, holderid, namefile, publicaccess) VALUES (?,?,?,?,?)";
 
@@ -176,9 +173,6 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
     }
 
 
-
-
-
     //language=SQL
     private final String SQL_FIND_FILES_BY_ID_USER = "SELECT * FROM file_oris WHERE holderid  = ? ORDER BY id DESC ";
 
@@ -226,8 +220,6 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
 
         return files;
     }
-
-
 
 
     //language=SQL
@@ -351,11 +343,6 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
     }
 
 
-
-
-
-
-
     //language=SQL
     private final String SQL_UPDATE = "UPDATE file_oris SET title = ? , description = ? , holderid = ? , namefile = ? , publicaccess = ? WHERE id = ? ";
 
@@ -402,14 +389,15 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
 
     //language=SQL
     private final String SQL_FILE_COUNT = "SELECT count(*) as count from file_oris";
-    public Long countFiles(){
-        try (Statement statement = dataSource.getConnection().createStatement();
-                ResultSet resultSet = statement.executeQuery(SQL_FILE_COUNT);
-                ){
 
-            if(resultSet.next()){
+    public Long countFiles() {
+        try (Statement statement = dataSource.getConnection().createStatement();
+             ResultSet resultSet = statement.executeQuery(SQL_FILE_COUNT);
+        ) {
+
+            if (resultSet.next()) {
                 return resultSet.getLong("count");
-            }else {
+            } else {
                 return null;
             }
 
@@ -417,7 +405,6 @@ public class CRUDRepositoryFileImpl implements CRUDRepositoryFile {
             throw new RuntimeException(e);
         }
     }
-
 
 
 }

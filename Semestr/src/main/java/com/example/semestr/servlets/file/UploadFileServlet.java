@@ -30,17 +30,15 @@ public class UploadFileServlet extends HttpServlet {
     private CRUDRepositoryFileImpl repositoryFile;
     private CRUDRepositoryFileAccessImpl repositoryFileAccess;
 
-
     @Override
     public void init() throws ServletException {
         repositoryFile = (CRUDRepositoryFileImpl) getServletContext().getAttribute("repositoryFile");
         repositoryFileAccess = (CRUDRepositoryFileAccessImpl) getServletContext().getAttribute("repositoryFileAccess");
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DecorationPages.setTitle(request,"Upload Files");
+        DecorationPages.setTitle(request, "Upload Files");
         getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/upload_file.jsp").forward(request, response);
     }
 
@@ -56,9 +54,8 @@ public class UploadFileServlet extends HttpServlet {
 
         Long userId = (Long) request.getSession().getAttribute("user_id");
 
-// Не работает в MainContextListener
-        String uploadPath = FULL_UPLOAD_DIRECTORY;
-        File uploadDir = new File(uploadPath);
+        // Не работает в MainContextListener ???
+        File uploadDir = new File(FULL_UPLOAD_DIRECTORY);
         if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
@@ -79,7 +76,7 @@ public class UploadFileServlet extends HttpServlet {
             repositoryFile.save(fileDC);
             repositoryFileAccess.save(fileDC.getId(), userId);
             for (Long idUser : accessUserIdLong) {
-                    repositoryFileAccess.save(fileDC.getId(), idUser);
+                repositoryFileAccess.save(fileDC.getId(), idUser);
             }
 
         } catch (DbException e) {

@@ -211,9 +211,9 @@ public class CRUDRepositoryFileAccessImpl implements CRUDRepositoryFileAccess {
     }
 
 
-
     //language=SQL
     private final String SQL_FIND_BY_FILE_ID_AND_USER_ID = "SELECT file_id, user_id from file_user_id where file_id = ? AND user_id = ?";
+
     public FileAccess findByFileIdAndUserId(Long fileId, Long userId) throws NoFoundRows {
         try (PreparedStatement preparedStatement = dataSource.getConnection()
                 .prepareStatement(SQL_FIND_BY_FILE_ID_AND_USER_ID);
@@ -234,9 +234,6 @@ public class CRUDRepositoryFileAccessImpl implements CRUDRepositoryFileAccess {
         }
 
     }
-
-
-
 
 
 }

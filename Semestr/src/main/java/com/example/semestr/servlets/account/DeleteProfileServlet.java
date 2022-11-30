@@ -1,11 +1,12 @@
 package com.example.semestr.servlets.account;
 
-import com.example.semestr.entities.User;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
 import com.example.semestr.services.SecurityService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -21,12 +22,12 @@ public class DeleteProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (SecurityService.isSigned(request)){
+        if (SecurityService.isSigned(request)) {
             Long userId = (Long) request.getSession().getAttribute("user_id");
             SecurityService.signOut(request);
             repositoryUser.delete(userId);
             response.sendRedirect(getServletContext().getContextPath() + "/main");
-        }else {
+        } else {
             response.sendRedirect(getServletContext().getContextPath() + "/main");
         }
     }

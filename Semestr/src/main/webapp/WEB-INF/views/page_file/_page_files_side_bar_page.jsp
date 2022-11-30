@@ -7,13 +7,10 @@
     <a class="nav_item_page" href="<c:url value="/files/my"/>">
         <h2 class="nav_item_title">My File</h2>
     </a>
-    <a class="nav_item_page" href="<c:url value="/user/find"/>">
-        <h2 class="nav_item_title">Find User</h2>
-    </a>
     <a class="nav_item_page" href="<c:url value="/subscriptions"/>">
         <h2 class="nav_item_title">Subscription</h2>
     </a>
     <a class="nav_item_page" href="<c:url value="/files/search"/>">
-        <h2 class="nav_item_title">Search</h2>
+        <h2 class="nav_item_title">Search File</h2>
     </a>
 </nav>

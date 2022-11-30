@@ -29,15 +29,15 @@ public class DeleteFileServlet extends HttpServlet {
         Long idFile = Long.valueOf(request.getParameter("idFile"));
         FileDC fileDC = repositoryFile.findById(idFile);
 
-        if(!( SecurityService.isAccess(request, fileDC.getHolderId()) ) ){
+        if (!(SecurityService.isAccess(request, fileDC.getHolderId()))) {
             getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/no_access.jsp").forward(request, response);
-            return ;
+            return;
         }
 
         String fileName = fileDC.getNameFile();
         repositoryFile.delete(idFile);
         //Сами файлики можно и не удалять хехехе))))
-        // TODO: 24.11.2022 Удаление через относительный путь
+        // TODO: 24.11.2022 Удаление через относительный путь для звлива на сервер
         File file = new File(FULL_UPLOAD_DIRECTORY + File.separator + fileName);
         if (file.delete()) {
             request.setAttribute("message", "Delete Done");

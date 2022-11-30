@@ -1,6 +1,5 @@
 package com.example.semestr.servlets.file;
 
-import com.example.semestr.entities.FileDC;
 import com.example.semestr.entities.FilesAndNameHolderDC;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
 import com.example.semestr.services.DecorationPages;
@@ -25,7 +24,7 @@ public class SearchServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DecorationPages.setTitle(request,"Search Files");
+        DecorationPages.setTitle(request, "Search Files");
         getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/search_file.jsp").forward(request, response);
     }
 
@@ -33,29 +32,23 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
-        DecorationPages.setTitle(request,"Search:"+title+" "+ description);
-
-        System.out.println("title: " + title + " description: " + description);
-
+        DecorationPages.setTitle(request, "Search:" + title + " " + description);
 
         List<FilesAndNameHolderDC> files = null;
 
-
-        if (title == null){
+        if (title == null) {
             title = "";
         }
-        if (description == null){
+        if (description == null) {
             description = "";
         }
 
         title = title.toLowerCase();
         description = description.toLowerCase();
 
-        if (!(title.isEmpty() && description.isEmpty())){
+        if (!(title.isEmpty() && description.isEmpty())) {
             files = repositoryFile.findByNameHolderTitleAndDescription(title, description);
         }
-
-        System.out.println("items_public_files: " + files);
 
         request.setAttribute("title", title);
         request.setAttribute("description", description);

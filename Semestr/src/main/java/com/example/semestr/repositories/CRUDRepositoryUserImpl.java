@@ -7,7 +7,10 @@ import com.example.semestr.exceptions.NoFoundRows;
 import com.example.semestr.exceptions.NotUniqueLogin;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -157,12 +160,6 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
     }
 
 
-
-
-
-
-
-
     //language=SQL
     private final String SQL_UPDATE = "UPDATE user_oris_hm4 SET name = ?, login = ? WHERE id = ? ";
 
@@ -181,13 +178,14 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
             }
         } catch (SQLException e) {
             throw new NotUniqueLogin(e);
-        }catch (NoFoundRows e){
+        } catch (NoFoundRows e) {
             throw new NoFoundRows(e);
         }
     }
 
     //language=SQL
     private final String SQL_UPDATE_PASSWORD = "UPDATE user_oris_hm4 SET password = ? WHERE id = ? ";
+
     public void updatePassword(User user) throws NoFoundRows {
         try (PreparedStatement preparedStatement = dataSource.getConnection()
                 .prepareStatement(SQL_UPDATE_PASSWORD)) {
@@ -201,7 +199,7 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }catch (NoFoundRows e){
+        } catch (NoFoundRows e) {
             throw new NoFoundRows(e);
         }
     }
@@ -209,6 +207,7 @@ public class CRUDRepositoryUserImpl implements CRUDRepositoryUser {
 
     //language=SQL
     private final String SQL_DELETE_BY_ID = "DELETE FROM user_oris_hm4 WHERE id  = ? ";
+
     @Override
     public void delete(Long id) {
         try (PreparedStatement preparedStatement = dataSource.getConnection()

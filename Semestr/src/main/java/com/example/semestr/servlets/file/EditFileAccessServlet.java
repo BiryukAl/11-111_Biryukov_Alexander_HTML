@@ -1,6 +1,5 @@
 package com.example.semestr.servlets.file;
 
-import com.example.semestr.entities.FileAccess;
 import com.example.semestr.entities.FileDC;
 import com.example.semestr.exceptions.DbException;
 import com.example.semestr.exceptions.NoFoundRows;
@@ -9,9 +8,11 @@ import com.example.semestr.repositories.CRUDRepositoryFileImpl;
 import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.SecurityService;
 import com.example.semestr.utils.UserAccessUtil;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
@@ -32,7 +33,7 @@ public class EditFileAccessServlet extends HttpServlet {
         Long idFile = Long.valueOf(request.getParameter("idFile"));
         FileDC fileDC = repositoryFile.findById(idFile);
 
-        DecorationPages.setTitle(request,"Edit: " + fileDC.getTitle());
+        DecorationPages.setTitle(request, "Edit: " + fileDC.getTitle());
 
 
         if (!(SecurityService.isAccess(request, fileDC.getHolderId()))) {
@@ -42,7 +43,7 @@ public class EditFileAccessServlet extends HttpServlet {
 
         String fileAccessString = UserAccessUtil.convertToString(repositoryFileAccess.findByFileId(idFile));
 
-        request.setAttribute("public_access", fileDC.isPublicAccess()? true : null);
+        request.setAttribute("public_access", fileDC.isPublicAccess() ? true : null);
         request.setAttribute("user_access", fileAccessString);
         request.setAttribute("idFile", idFile);
 

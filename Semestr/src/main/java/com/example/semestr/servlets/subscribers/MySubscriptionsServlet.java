@@ -2,20 +2,21 @@ package com.example.semestr.servlets.subscribers;
 
 import com.example.semestr.entities.FriendDC;
 import com.example.semestr.repositories.CRUDRepositoryFriendsImpl;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import com.example.semestr.services.DecorationPages;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/subscriptions")
 public class MySubscriptionsServlet extends HttpServlet {
-
-
     private CRUDRepositoryFriendsImpl repositoryFriends;
 
-     @Override
+    @Override
     public void init() throws ServletException {
         repositoryFriends = (CRUDRepositoryFriendsImpl) getServletContext().getAttribute("repositoryFriends");
     }
@@ -27,6 +28,7 @@ public class MySubscriptionsServlet extends HttpServlet {
         Long countSubscriptions = repositoryFriends.countFriends(idUser);
         request.setAttribute("count_subscriptions", countSubscriptions);
 
+        DecorationPages.setTitle(request, "Subscriptions");
 
         List<FriendDC> friends = repositoryFriends.findFriendsByIdUser(idUser);
 

@@ -5,10 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <title>${title_page}</title>
-    <link rel="stylesheet" href="<c:url value="/style.css"/>">
+<%--    <link rel="stylesheet" href="<c:url value="/style.css"/>">--%>
     <style rel="text/css">
         <%@ include file="/WEB-INF/fix_style.jsp" %>
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<c:url value="../js/main.js"/>"></script>
+    <script>
+        <%@ include file="/WEB-INF/fix_script.jsp" %>
+    </script>
 </head>
 <body>
 <div class="page_wrapper">

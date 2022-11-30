@@ -24,7 +24,7 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DecorationPages.setTitle(request,"ProduceDisk:SignIn");
+        DecorationPages.setTitle(request, "ProduceDisk:SignIn");
         getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_in.jsp").forward(request, response);
     }
 

@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import static com.example.semestr.MainContextListener.MAX_FILES_FOR_PAGE;
+
 @WebServlet("/")
 public class MainPageServlet extends HttpServlet {
 
@@ -22,9 +24,9 @@ public class MainPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DecorationPages.setTitle(request,"ProduceDisk");
+        DecorationPages.setTitle(request, "ProduceDisk");
         request.setAttribute("count_file", repositoryFile.countFiles());
-        request.setAttribute("items_public_files", repositoryFile.findAllPublicAndNameHolder(10, 0));
+        request.setAttribute("items_public_files", repositoryFile.findAllPublicAndNameHolder(MAX_FILES_FOR_PAGE, 0));
         getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/main_page.jsp").forward(request, response);
 
     }

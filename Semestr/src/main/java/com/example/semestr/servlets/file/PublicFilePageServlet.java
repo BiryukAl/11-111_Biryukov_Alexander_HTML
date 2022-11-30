@@ -3,9 +3,11 @@ package com.example.semestr.servlets.file;
 import com.example.semestr.entities.FilesAndNameHolderDC;
 import com.example.semestr.repositories.CRUDRepositoryFileImpl;
 import com.example.semestr.services.DecorationPages;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,26 +22,25 @@ public class PublicFilePageServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         repositoryFile = (CRUDRepositoryFileImpl) getServletContext().getAttribute("repositoryFile");
-//        repositoryUser= (CRUDRepositoryUserImpl) getServletContext().getAttribute("repositoryUser");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DecorationPages.setTitle(request,"ProduceDisk");
+        DecorationPages.setTitle(request, "ProduceDisk");
         String pageStr = request.getParameter("page");
-        if (pageStr == null){
+        if (pageStr == null) {
             response.sendRedirect(getServletContext().getContextPath() + "/");
             return;
         }
 
         Integer page = Integer.valueOf(pageStr);
-        Integer shift = Integer.valueOf(request.getParameter("shift") == null?"0":request.getParameter("shift"));
+        Integer shift = Integer.valueOf(request.getParameter("shift") == null ? "0" : request.getParameter("shift"));
 
-        if (shift == 1 ){
+        if (shift == 1) {
             shift = -1;
-        }else if (shift == 2){
+        } else if (shift == 2) {
             shift = 1;
-        }else {
+        } else {
             shift = 0;
         }
 
@@ -47,14 +48,14 @@ public class PublicFilePageServlet extends HttpServlet {
 
         request.setAttribute("page", page);
 
-        List<FilesAndNameHolderDC>  itemsPublicFiles = repositoryFile.findAllPublicAndNameHolder(MAX_FILES_FOR_PAGE, page-1);
+        List<FilesAndNameHolderDC> itemsPublicFiles = repositoryFile.findAllPublicAndNameHolder(MAX_FILES_FOR_PAGE, page - 1);
 
-        boolean is_next = itemsPublicFiles.size()<MAX_FILES_FOR_PAGE;
+        boolean is_next = itemsPublicFiles.size() < MAX_FILES_FOR_PAGE;
 
 
-        request.setAttribute("is_next", is_next?true:null);
+        request.setAttribute("is_next", is_next ? true : null);
 
-        request.setAttribute("items_public_files", itemsPublicFiles); // Можно прикрутить страницы
+        request.setAttribute("items_public_files", itemsPublicFiles);
 
 
         // TODO: 25.11.2022 Вывод Holder Name

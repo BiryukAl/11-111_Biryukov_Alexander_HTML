@@ -8,9 +8,11 @@ import com.example.semestr.repositories.CRUDRepositoryFriendsImpl;
 import com.example.semestr.repositories.CRUDRepositoryUserImpl;
 import com.example.semestr.services.DecorationPages;
 import com.example.semestr.services.SecurityService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,8 +24,6 @@ public class ViewUserServlet extends HttpServlet {
     private CRUDRepositoryFriendsImpl repositoryFriends;
     private CRUDRepositoryFileImpl repositoryFile;
     private CRUDRepositoryFileAccessImpl repositoryFileAccess;
-
-
 
     @Override
     public void init() throws ServletException {
@@ -42,13 +42,13 @@ public class ViewUserServlet extends HttpServlet {
         if (SecurityService.isSigned(request)) {
             Long myId = (Long) request.getSession().getAttribute("user_id");
 
-            if (idUser.equals(myId)){
+            if (idUser.equals(myId)) {
                 response.sendRedirect(getServletContext().getContextPath() + "/profile");
                 return;
             }
         }
 
-        User user =  repositoryUser.findById(idUser);
+        User user = repositoryUser.findById(idUser);
 
         DecorationPages.setTitle(request, user.getName());
 
@@ -56,9 +56,12 @@ public class ViewUserServlet extends HttpServlet {
         request.setAttribute("friend_id", user.getId());
         request.setAttribute("subscribers", repositoryFriends.countSubscribers(idUser));
 
-        if (SecurityService.isSigned(request)){
-            boolean isFriend = repositoryFriends.isFriend((Long) request.getSession().getAttribute("user_id"), idUser) != null ;
+        if (SecurityService.isSigned(request)) {
+
+            boolean isFriend = repositoryFriends.isFriend((Long) request.getSession().getAttribute("user_id"), idUser) != null;
             request.setAttribute("is_friend", isFriend);
+
+            request.setAttribute("is_signed", SecurityService.isSigned(request));
         }
 
 

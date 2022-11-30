@@ -22,11 +22,12 @@ public class MyFilesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DecorationPages.setTitle(request,"Files Disk");
+        DecorationPages.setTitle(request, "Files Disk");
 
         Long idUser = (Long) request.getSession().getAttribute("user_id");
-        if (idUser != null){
-            request.setAttribute("items_my_files", repositoryFile.findByIdUser(idUser)); // Можно прикрутить страницы
+        if (idUser != null) {
+            // TODO: 30.11.2022 Сделать со страницами (Add LIMIT & OFFSET)
+            request.setAttribute("items_my_files", repositoryFile.findByIdUser(idUser));
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/views/page_file/my_files.jsp").forward(request, response);
@@ -34,6 +35,6 @@ public class MyFilesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        this.doGet(request, response);
     }
 }

@@ -8,7 +8,7 @@ public class SecurityService {
         return request.getSession().getAttribute("user_login") != null;
     }
 
-    public static boolean  isAccess(HttpServletRequest request, Long id){
+    public static boolean isAccess(HttpServletRequest request, Long id) {
         return request.getSession().getAttribute("user_id") == id;
     }
 

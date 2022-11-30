@@ -12,24 +12,17 @@
             <p class="setting_text">${subscribers}</p>
             <h3 class="selected_page_h3">User ID: </h3>
             <p class="setting_text">${friend_id}</p>
+            <c:if test="${is_signed}">
+
+                <div class="all_btn_item_file">
+                    <button class="btn_item_file" id="btn_subscribe" onclick="subscribe(${friend_id})"   <c:if test="${is_friend}">hidden = "hidden"</c:if>    >Subscribe</button>
+                    <button class="btn_item_file" id="btn_unsubscribe" onclick="unsubscribe(${friend_id})" <c:if test="${not is_friend}">hidden = "hidden"</c:if> >Unsubscribe</button>
+                </div>
+                
+                
 
 
-
-
-            <c:if test="${not empty is_friend }">
-                <c:if test="${not is_friend}">
-                    <div class="all_btn_item_file">
-                        <a class="btn_item_file" href="<c:url value="/subscriptions/subscribe?idUser=${friend_id}"/>">Subscribe</a>
-                    </div>
-                </c:if>
-                <c:if test="${is_friend}">
-                    <div class="all_btn_item_file">
-                            <a  class="btn_item_file" href="<c:url value="/subscriptions/unsubscribe?idUser=${friend_id}"/>">Unsubscribe</a>
-                    </div>
-                </c:if>
             </c:if>
-
-
             <c:forEach items="${items_friend_files}" var="file">
                 <div class="container_item_file">
                     <h3 class="item_file_title"> ${file.title}</h3>

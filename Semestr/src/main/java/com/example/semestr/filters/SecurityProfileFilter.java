@@ -16,7 +16,7 @@ public class SecurityProfileFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        if (SecurityService.isSigned(request) ) {
+        if (SecurityService.isSigned(request)) {
             super.doFilter(request, response, chain);
         } else {
             response.sendRedirect(request.getContextPath() + "/account/sign_in");

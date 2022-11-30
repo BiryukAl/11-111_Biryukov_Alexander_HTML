@@ -21,26 +21,23 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-
         repositoryUser = (CRUDRepositoryUserImpl) getServletContext().getAttribute("repositoryUser");
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DecorationPages.setTitle(request,"ProduceDisk:SignUp");
+        DecorationPages.setTitle(request, "ProduceDisk:SignUp");
         getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_up.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String name = request.getParameter("name");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
         request.setAttribute("name", name);
-        if ( !(name.isEmpty() || login.isEmpty() || password.isEmpty())) {
+        if (!(name.isEmpty() || login.isEmpty() || password.isEmpty())) {
             User user = User.builder().name(name).login(login).password(password).build();
 
             try {
@@ -56,7 +53,7 @@ public class SignUpServlet extends HttpServlet {
 
             request.setAttribute("name", request.getParameter("name"));
 
-        }else {
+        } else {
             request.setAttribute("message", "You have to fill all form fields.");
             getServletContext().getRequestDispatcher("/WEB-INF/views/sign/sing_up.jsp").forward(request, response);
         }
