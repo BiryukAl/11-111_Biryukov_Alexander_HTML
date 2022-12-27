@@ -38,6 +38,7 @@ public class SignUpServlet extends HttpServlet {
 
         request.setAttribute("name", name);
         if (!(name.isEmpty() || login.isEmpty() || password.isEmpty())) {
+//            DigestUtils.md5Hex(password).toUpperCase();
             User user = User.builder().name(name).login(login).password(password).build();
 
             try {

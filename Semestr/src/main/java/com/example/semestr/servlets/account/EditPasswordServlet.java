@@ -41,6 +41,7 @@ public class EditPasswordServlet extends HttpServlet {
         String newPassword = request.getParameter("new_password");
 
         if (!(oldPassword.isEmpty() || newPassword.isEmpty())) {
+//            DigestUtils.md5Hex(password).toUpperCase();
             User oldUser = repositoryUser.findByLoginAndPassword((String) request.getSession().getAttribute("user_login"), oldPassword);
 
             if (oldUser == null) {
@@ -48,6 +49,7 @@ public class EditPasswordServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/views/account/edit_password.jsp").forward(request, response);
                 return;
             }
+            //            DigestUtils.md5Hex(password).toUpperCase();
 
             User newUser = User.builder()
                     .id(oldUser.getId())

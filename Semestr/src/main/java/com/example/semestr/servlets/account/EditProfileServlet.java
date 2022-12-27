@@ -46,6 +46,7 @@ public class EditProfileServlet extends HttpServlet {
         String name = request.getParameter("name");
         String login = request.getParameter("login");
         String oldPassword = request.getParameter("old_password");
+        //            DigestUtils.md5Hex(password).toUpperCase();
 
         if (!(name.isEmpty() || login.isEmpty())) {
             String idLogin = (String) request.getSession().getAttribute("user_login");

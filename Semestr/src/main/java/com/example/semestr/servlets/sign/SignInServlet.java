@@ -38,6 +38,7 @@ public class SignInServlet extends HttpServlet {
 
         if (!(login.isEmpty() || password.isEmpty())) {
 
+//            DigestUtils.md5Hex(password).toUpperCase();
 
             User user = repositoryUser.findByLoginAndPassword(login, password);
 
