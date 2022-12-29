@@ -19,6 +19,7 @@ public class CollapseApplication extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(CollapseApplication.class.getResource("view/main.fxml"));
 
+        /*Работает со старой версеей контроллера */
 //        fxmlLoader.setController(new MainController(stage));
         fxmlLoader.setController(new GameController(stage));
 

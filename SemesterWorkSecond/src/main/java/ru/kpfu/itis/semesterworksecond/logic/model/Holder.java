@@ -1,6 +1,8 @@
 package ru.kpfu.itis.semesterworksecond.logic.model;
 
-public enum Holder {
+import java.io.Serializable;
+
+public enum Holder implements Serializable {
     FIRST, //BLUE
     SECOND //RED
 }

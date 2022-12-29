@@ -1,24 +1,19 @@
 package ru.kpfu.itis.semesterworksecond.logic;
 
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import ru.kpfu.itis.semesterworksecond.logic.model.Holder;
 import ru.kpfu.itis.semesterworksecond.logic.model.Point;
 import ru.kpfu.itis.semesterworksecond.utils.Utilites;
 
-public class CoreGame {
+import java.io.Serializable;
+
+public class CoreGame implements Serializable {
 
     BattleGrid battleGrid = new BattleGrid();
 
     private final int sizeAreaX = battleGrid.COLUM;
     private final int sizeAreaY = battleGrid.ROW;
-
-    GridPane gridPane;
-
 
     /**
      * @value Чей ход следущий, первый ход принадлежит первому игроку
@@ -30,12 +25,17 @@ public class CoreGame {
     public CoreGame() {
     }
 
+    public boolean isMyStep(Holder holder){
+        return nextHolderStep == holder;
+    }
+
+
 
     public boolean step(int indexColum, int indexRow, Holder holder) {
         Holder clikedPointHolder = battleGrid.grid[indexRow][indexColum].getHolder();
 
         if (countAllStep < 2) {
-            if (clikedPointHolder != null){
+            if (clikedPointHolder != null) {
                 return false;
             }
             Point newPoint = new Point(indexColum, indexRow, holder);
@@ -93,4 +93,11 @@ public class CoreGame {
         return new Pair<>(pair.getKey(), countAllStep < 2 ? null : pair.getValue());
     }
 
+    public BattleGrid getBattleGrid() {
+        return battleGrid;
+    }
+
+    public Long getCountAllStep() {
+        return countAllStep;
+    }
 }

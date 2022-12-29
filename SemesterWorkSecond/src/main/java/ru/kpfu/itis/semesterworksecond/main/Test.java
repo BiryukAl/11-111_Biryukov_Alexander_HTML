@@ -32,9 +32,5 @@ public class Test {
         stringBuilder.append(".png");
 
         System.out.println(stringBuilder);
-
-
-
-
     }
 }

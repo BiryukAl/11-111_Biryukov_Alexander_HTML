@@ -47,8 +47,6 @@ public class GameController implements Initializable {
         GridPane newGridPane = coreGame.draw();
         newGridPane.setId("playingArea");
 
-
-
         EventHandler<MouseEvent> eventPlayingArea = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -97,8 +95,6 @@ public class GameController implements Initializable {
                 }
             }
         };
-
-
 
 
         newGridPane.setOnMouseClicked(eventPlayingArea);

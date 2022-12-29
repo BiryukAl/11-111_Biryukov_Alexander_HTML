@@ -6,7 +6,9 @@ import javafx.scene.layout.GridPane;
 import ru.kpfu.itis.semesterworksecond.logic.model.Point;
 import ru.kpfu.itis.semesterworksecond.utils.Utilites;
 
-public class BattleGrid {
+import java.io.Serializable;
+
+public class BattleGrid implements Serializable {
     /**
      * @value значения по x
      */

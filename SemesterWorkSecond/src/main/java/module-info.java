@@ -1,6 +1,8 @@
 module ru.kpfu.itis.semesterworksecond {
     requires javafx.controls;
     requires javafx.fxml;
+    requires kotlin.stdlib;
+    requires org.apache.commons.lang3;
 
 
     opens ru.kpfu.itis.semesterworksecond to javafx.fxml;

@@ -2,15 +2,15 @@ package ru.kpfu.itis.semesterworksecond.logic.model;
 
 import javafx.scene.image.Image;
 
-public class Point {
+import java.io.Serializable;
+
+public class Point implements Serializable {
     private final int MAX_WEIGHT = 3;
     private int x;
     private int y;
     private int weight = 0;
 
     Holder holder = null;
-
-
 
     public Point(int x, int y, Holder holder) {
         setX(x);

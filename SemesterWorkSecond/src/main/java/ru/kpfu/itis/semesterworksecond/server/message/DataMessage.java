@@ -1,11 +1,8 @@
-package ru.kpfu.itis.semesterworksecond.server;
+package ru.kpfu.itis.semesterworksecond.server.message;
 
 import java.io.Serializable;
 
 public class DataMessage implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-
     // Head
     public final int head;
 
